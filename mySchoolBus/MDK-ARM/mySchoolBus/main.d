@@ -28,8 +28,13 @@ myschoolbus\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 myschoolbus\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 myschoolbus\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 myschoolbus\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+myschoolbus\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+myschoolbus\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 myschoolbus\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 myschoolbus\main.o: ../Hardware/GPS.h
 myschoolbus\main.o: ../Hardware/nfc.h
+myschoolbus\main.o: ../Core/Inc/tim.h
 myschoolbus\main.o: ../Core/Inc/usart.h
 myschoolbus\main.o: ../Core/Inc/gpio.h
+myschoolbus\main.o: ../Hardware/SR04.h
+myschoolbus\main.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h

@@ -58,6 +58,14 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define supersonic_signal_Pin GPIO_PIN_9
+#define supersonic_signal_GPIO_Port GPIOE
+#define first_supersonic_Pin GPIO_PIN_10
+#define first_supersonic_GPIO_Port GPIOE
+#define second_signal_Pin GPIO_PIN_11
+#define second_signal_GPIO_Port GPIOE
+#define second_supersonic_Pin GPIO_PIN_12
+#define second_supersonic_GPIO_Port GPIOE
 
 /* USER CODE BEGIN Private defines */
 

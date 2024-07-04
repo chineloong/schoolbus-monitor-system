@@ -37,34 +37,34 @@ void wgs84togcj02(float *lng, float *lat)
  
 float transformlat(float lng, float lat)
 {
-    float ret = -100.0 + 2.0 * lng + 3.0 * lat + 0.2 * lat * lat + \
-        0.1 * lng * lat + 0.2 * sqrt(abs(lng));
+    float ret = -100.0f + 2.0f * lng + 3.0f * lat + 0.2f * lat * lat + \
+        0.1f * lng * lat + 0.2f * sqrt(abs(lng));
 
-    ret += (20.0 * sin(6.0 * lng * pi) + 20.0 *
-            sin(2.0 * lng * pi)) * 2.0 / 3.0;
+    ret += (20.0f * sin(6.0 * lng * pi) + 20.0f *
+            sin(2.0 * lng * pi)) * 2.0f / 3.0f;
 
-    ret += (20.0 * sin(lat * pi) + 40.0 *
-            sin(lat / 3.0 * pi)) * 2.0 / 3.0;
+    ret += (20.0f * sin(lat * pi) + 40.0f *
+            sin(lat / 3.0f * pi)) * 2.0f / 3.0f;
 
-    ret += (160.0 * sin(lat / 12.0 * pi) + 320 *
-            sin(lat * pi / 30.0)) * 2.0 / 3.0;
+    ret += (160.0f * sin(lat / 12.0f * pi) + 320 *
+            sin(lat * pi / 30.0f)) * 2.0f / 3.0f;
 
     return ret;
 }
  
 float transformlng(float lng, float lat)
 {
-    float ret = 300.0 + lng + 2.0 * lat + 0.1 * lng * lng + \
-        0.1 * lng * lat + 0.1 * sqrt(abs(lng));
+    float ret = 300.0f + lng + 2.0f * lat + 0.1f * lng * lng + \
+        0.1f * lng * lat + 0.1f * sqrt(abs(lng));
 
-    ret += (20.0 * sin(6.0 * lng * pi) + 20.0 *
-            sin(2.0 * lng * pi)) * 2.0 / 3.0;
+    ret += (20.0f * sin(6.0f * lng * pi) + 20.0f *
+            sin(2.0f * lng * pi)) * 2.0f / 3.0f;
 
-    ret += (20.0 * sin(lng * pi) + 40.0 *
-            sin(lng / 3.0 * pi)) * 2.0 / 3.0;
+    ret += (20.0f * sin(lng * pi) + 40.0f *
+            sin(lng / 3.0f * pi)) * 2.0f / 3.0f;
 
-    ret += (150.0 * sin(lng / 12.0 * pi) + 300.0 *
-            sin(lng / 30.0 * pi)) * 2.0 / 3.0;
+    ret += (150.0f * sin(lng / 12.0f * pi) + 300.0f *
+            sin(lng / 30.0f * pi)) * 2.0f / 3.0f;
 
     return ret;
 }
