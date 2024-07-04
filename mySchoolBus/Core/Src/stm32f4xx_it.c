@@ -284,21 +284,26 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		
 
 }
-
+ enum nfc_order laststate = find;
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
+		
 		if(huart == &huart2)
 		{
-				if(nfc == find)
+				if(memcmp(&nfc_frame[0],&nfc_reply[0],5) == 0)
 				{
-						if(memcmp(&nfc_frame[0],&nfc_ack[0],5) == 0)
-						{
-							memcpy(&nfcRecv[0],&nfc_frame[0],50);
-						}
-				
-				
+					laststate = nfc;
+					nfc = loss;
+
 				}
-//			memcpy(&nfcRecv[0],&nfc_frame[0],50);
+				if(memcmp(&nfc_frame[0],&nfc_readack[0],5) == 0)
+				{
+					memcpy(&nfcRecv[0],&nfc_frame[0],50);
+					laststate = nfc;
+					nfc = read;
+				}
+
+
 				memset(nfc_frame,0x00,50);
 				HAL_UARTEx_ReceiveToIdle_IT(&huart2,&nfc_frame[0],50);
 		}

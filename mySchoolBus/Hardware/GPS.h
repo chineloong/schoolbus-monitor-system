@@ -19,7 +19,7 @@ extern uint8_t GPS_data;
 #define N_S_Length 2
 #define longitude_Length 12
 #define E_W_Length 2 
-
+#define knot_length 5
 typedef struct GPSData 
 {
 	char GPS_Buffer[GPS_Buffer_Length];
@@ -30,9 +30,11 @@ typedef struct GPSData
 	char N_S[N_S_Length];		//N/S
 	char raw_longitude[longitude_Length];		//经度
 	char E_W[E_W_Length];		//E/W
+	char knot[knot_length];//节速度
 	char isUsefull;		//定位信息是否有效
 	float latitude;
 	float longitude;
+	float speed;
 } GPSData;
 
 extern uint8_t GPS_Frame[USART_REC_LEN];

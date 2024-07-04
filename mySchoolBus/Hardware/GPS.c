@@ -11,7 +11,7 @@ uint8_t GPS_data;
 
 GPSData GPS;
 
-
+//GPS数据解算
 float mylatitude,mylongitude;
 void parseGpsBuffer()
 {
@@ -22,7 +22,7 @@ void parseGpsBuffer()
 	{
 		GPS.isGetData = false;
 		
-		for (i = 0 ; i <= 6 ; i++)
+		for (i = 0 ; i <= 7 ; i++)
 		{
 			if (i == 0)
 			{
@@ -42,6 +42,7 @@ void parseGpsBuffer()
 						case 4:memcpy(GPS.N_S, subString, subStringNext - subString);break;	//获取N/S
 						case 5:memcpy(GPS.raw_longitude, subString, subStringNext - subString);break;	//获取经度信息
 						case 6:memcpy(GPS.E_W, subString, subStringNext - subString);break;	//获取E/W
+						case 7:memcpy(GPS.knot, subString, subStringNext - subString);break;	//获取E/W
 
 						default:break;
 					}
@@ -71,6 +72,8 @@ void parseGpsBuffer()
 					
 					wgs84togcj02(&GPS.longitude,&GPS.latitude);
 					
+					sscanf(GPS.knot, "%f", &GPS.speed);
+					GPS.speed = GPS.speed/1.852f;
 					
 					subString = subStringNext;
 					GPS.isParseData = true;

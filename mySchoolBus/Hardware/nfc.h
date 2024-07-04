@@ -4,7 +4,7 @@
 #include "stm32f4xx.h"
 
 extern uint8_t nfcdata;
-extern const uint8_t nfc_ack[];
+extern const uint8_t nfc_readack[];
 extern uint8_t nfc_frame[50];
 extern uint8_t nfcRecv[50];
 
@@ -13,17 +13,15 @@ extern const uint8_t nfc_find[11];
 extern const uint8_t nfc_read[];
 extern const uint8_t nfc_reply[];
 enum nfc_order{
-	ack,
+	loss,
 	find,
 	read
 };
 
 struct nfc_data{
-	uint32_t frame;
-	uint8_t check;
-	uint64_t dataH;
-	uint32_t dataL;
-	uint16_t end;
+	uint32_t Card_ID;
+	int16_t sumCard;
+	uint32_t lastCardID;
 };	
 
 extern enum nfc_order nfc;

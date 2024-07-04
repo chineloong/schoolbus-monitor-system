@@ -13,7 +13,8 @@ void SR04_Init(void)
 		SR04.measure_state1 = 0;
 		SR04.measure_state2 = 0;
 }
-//===============================================读取距离
+
+//读取距离
 void SR04_GetData(void)
 {	
 	if(SR04.measure_state1 == 0)
@@ -24,7 +25,7 @@ void SR04_GetData(void)
 			TRIG_L;
 
 			__HAL_TIM_SET_CAPTUREPOLARITY(&htim1, TIM_CHANNEL_1, TIM_INPUTCHANNELPOLARITY_RISING);
-			HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_1);	//启动输入捕获       或者: __HAL_TIM_ENABLE(&htim5);  
+			HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_1);	//启动输入捕获 
 			SR04.measure_state1 = 1;
 	}
 	if(SR04.measure_state2 == 0)
@@ -35,14 +36,14 @@ void SR04_GetData(void)
 			TRIG2_L;
 
 			__HAL_TIM_SET_CAPTUREPOLARITY(&htim1, TIM_CHANNEL_2, TIM_INPUTCHANNELPOLARITY_RISING);
-			HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_2);	//启动输入捕获       或者: __HAL_TIM_ENABLE(&htim5);  
+			HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_2);	//启动输入捕获   
 			SR04.measure_state2 = 1;
 	}
 
 }
 
 
-//===============================================中断回调函数
+//中断回调函数
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)//
 {
 	

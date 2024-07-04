@@ -71,6 +71,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+
   HAL_Init();
 
   /* USER CODE BEGIN Init */
@@ -107,13 +108,14 @@ int main(void)
   while (1)
   {
 			parseGpsBuffer();
-			SR04_GetData();
-      HAL_Delay(50);
+//			SR04_GetData();
+      HAL_Delay(500);
+			nfc_findCard();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
 //		HAL_Delay(1000);
-//		nfc_findCard();
+//		
   }
   /* USER CODE END 3 */
 }
