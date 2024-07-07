@@ -56,6 +56,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+int test;
 /* USER CODE END 0 */
 
 /**
@@ -71,7 +72,6 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-
   HAL_Init();
 
   /* USER CODE BEGIN Init */
@@ -90,6 +90,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_TIM1_Init();
+  MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
 	HAL_Delay(1000);
 	
@@ -108,9 +109,13 @@ int main(void)
   while (1)
   {
 			parseGpsBuffer();
-//			SR04_GetData();
+			SR04_GetData();
       HAL_Delay(500);
 			nfc_findCard();
+		
+			if(flag == 0 || flag == 1)
+					intoBus();
+			cardWarning();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

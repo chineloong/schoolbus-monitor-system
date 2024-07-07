@@ -22,25 +22,29 @@ Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 C:\Users\Chineloong\Desktop\schoolbus\mySchoolBus\MDK-ARM\mySchoolBus.uvprojx
-Project File Date:  07/04/2024
+Project File Date:  07/05/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\keil5\ARM\ARMCC\Bin'
 Build target 'mySchoolBus'
-compiling main.c...
+compiling SR04.c...
 ../Hardware/GPS.h(45): warning:  #1295-D: Deprecated declaration parseGpsBuffer - give arg types
   void parseGpsBuffer();
-../Core/Src/main.c: 1 warning, 0 errors
-compiling GPS.c...
-..\Hardware\GPS.h(45): warning:  #1295-D: Deprecated declaration parseGpsBuffer - give arg types
-  void parseGpsBuffer();
-..\Hardware\GPS.c(56): warning:  #223-D: function "sscanf" declared implicitly
-  					sscanf(GPS.raw_latitude, "%f", &mylatitude);
-..\Hardware\GPS.c: 2 warnings, 0 errors
+..\Hardware\SR04.c(99): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		if(SR04.distance1 <= 1.0 && SR04.distance1 >= 0.2)
+..\Hardware\SR04.c(99): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		if(SR04.distance1 <= 1.0 && SR04.distance1 >= 0.2)
+..\Hardware\SR04.c(104): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		if(SR04.distance2 <= 1.0 && SR04.distance2 >= 0.2)
+..\Hardware\SR04.c(104): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		if(SR04.distance2 <= 1.0 && SR04.distance2 >= 0.2)
+..\Hardware\SR04.c(120): warning:  #940-D: missing return statement at end of non-void function "intoBus" 
+  }
+..\Hardware\SR04.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=16916 RO-data=852 RW-data=40 ZI-data=1704  
+Program Size: Code=17408 RO-data=848 RW-data=52 ZI-data=1716  
 FromELF: creating hex file...
-"mySchoolBus\mySchoolBus.axf" - 0 Error(s), 3 Warning(s).
+"mySchoolBus\mySchoolBus.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 
