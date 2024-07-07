@@ -38,3 +38,4 @@ myschoolbus\main.o: ../Core/Inc/usart.h
 myschoolbus\main.o: ../Core/Inc/gpio.h
 myschoolbus\main.o: ../Hardware/SR04.h
 myschoolbus\main.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+myschoolbus\main.o: ../Hardware/4G.h

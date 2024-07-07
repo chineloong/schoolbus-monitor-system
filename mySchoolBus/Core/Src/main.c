@@ -25,6 +25,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "SR04.h"
+#include "4G.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -56,7 +58,11 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int test;
+int ret;
+int ret1;
+int ret2;
+char get0[]="tes";
+char get[]="get";
 /* USER CODE END 0 */
 
 /**
@@ -95,32 +101,42 @@ int main(void)
 	HAL_Delay(1000);
 	
 	//nfc¿¨¿ØÖÆ
-	HAL_UARTEx_ReceiveToIdle_IT(&huart2,&nfc_frame[0],50);
-	nfc_WakeUp();
-	HAL_Delay(100);
-	nfc_findCard();
+//	HAL_UARTEx_ReceiveToIdle_IT(&huart2,&nfc_frame[0],50);
+//	nfc_WakeUp();
+//	HAL_Delay(100);
+//	nfc_findCard();
+//	
+//	SR04_Init();
 	
-	SR04_Init();
 	
+	
+		
+		Net4GInit();
+		HAL_Delay(2500);
+		
+		GPS_Send();	
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-			parseGpsBuffer();
-			SR04_GetData();
-      HAL_Delay(500);
-			nfc_findCard();
-		
-			if(flag == 0 || flag == 1)
-					intoBus();
-			cardWarning();
+//			parseGpsBuffer();
+//			SR04_GetData();
+//				HAL_UART_Transmit(&huart3,(uint8_t *)get,4,100);
+				HAL_Delay(1500);
+//			nfc_findCard();
+//		
+//			if(flag == 0 || flag == 1)
+//					intoBus();
+//			cardWarning();
+			
+			
+			
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-//		HAL_Delay(1000);
-//		
+	
   }
   /* USER CODE END 3 */
 }

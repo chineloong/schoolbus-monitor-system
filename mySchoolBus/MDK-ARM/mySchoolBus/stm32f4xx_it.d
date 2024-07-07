@@ -37,3 +37,6 @@ myschoolbus\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
 myschoolbus\stm32f4xx_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 myschoolbus\stm32f4xx_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\math.h
 myschoolbus\stm32f4xx_it.o: ../Hardware/GPS_Transform.h
+myschoolbus\stm32f4xx_it.o: ../Hardware/atk_idm750c.h
+myschoolbus\stm32f4xx_it.o: ../Hardware/atk_idm750c_cfg.h
+myschoolbus\stm32f4xx_it.o: ../Hardware/atk_idm750c_uart.h

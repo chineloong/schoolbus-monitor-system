@@ -42,6 +42,6 @@ extern uint8_t GPS_data;
 
 extern GPSData GPS;
 
-void parseGpsBuffer();
+void parseGpsBuffer(void);
 void gcj02_to_wgs84(double lon, double lat, double *output);
 #endif
