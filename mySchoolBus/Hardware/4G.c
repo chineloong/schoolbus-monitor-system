@@ -41,12 +41,13 @@ void GPS_Send(void)
 {
 		char msg[100];
 		int size;
-		if(1)//GPS.isUsefull
+		static float test = 110.1f;
+		if(GPS.isUsefull)//
 		{
 				//sprintf(msg,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
-				size = snprintf(msg,100,"!%f,%f,%f",140.2f,300.8f,3.5f);
+				size = snprintf(msg,100,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
 				Message_Send(msg,size);
-
+				test++;
 		}
 
 }

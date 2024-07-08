@@ -101,35 +101,28 @@ int main(void)
 	HAL_Delay(1000);
 	
 	//nfc¿¨¿ØÖÆ
-//	HAL_UARTEx_ReceiveToIdle_IT(&huart2,&nfc_frame[0],50);
-//	nfc_WakeUp();
-//	HAL_Delay(100);
-//	nfc_findCard();
-//	
-//	SR04_Init();
-	
-	
-	
+	Net4GInit();
+
+	HAL_Delay(1000);
 		
-		Net4GInit();
-		HAL_Delay(2500);
-		
-		GPS_Send();	
+			
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-//			parseGpsBuffer();
-//			SR04_GetData();
+		
+			GPS_Send();
+			parseGpsBuffer();
+			SR04_GetData();
 //				HAL_UART_Transmit(&huart3,(uint8_t *)get,4,100);
-				HAL_Delay(1500);
-//			nfc_findCard();
+			HAL_Delay(200);
+			nfc_findCard();
 //		
-//			if(flag == 0 || flag == 1)
-//					intoBus();
-//			cardWarning();
+			if(flag == 0 || flag == 1)
+					intoBus();
+			cardWarning();
 			
 			
 			
