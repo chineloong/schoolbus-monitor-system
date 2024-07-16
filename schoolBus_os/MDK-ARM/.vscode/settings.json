@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "gps_task.h": "c",
+        "4g.h": "c"
+    }
+}
