@@ -26,6 +26,9 @@
 /* USER CODE BEGIN Includes */
 #include "string.h"
 #include "4G.h"
+#include "DrivingTask.h"
+#include "GPS.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -62,6 +65,7 @@ int rxConut=0;
 extern TIM_HandleTypeDef htim1;
 extern UART_HandleTypeDef huart4;
 extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart2;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -210,8 +214,25 @@ void USART1_IRQHandler(void)
   /* USER CODE END USART1_IRQn 0 */
   HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */
-	
+	HAL_UART_Receive_IT(&huart1,&GPS_data,1);
   /* USER CODE END USART1_IRQn 1 */
+}
+
+/**
+  * @brief This function handles USART2 global interrupt.
+  */
+void USART2_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART2_IRQn 0 */
+
+  /* USER CODE END USART2_IRQn 0 */
+  HAL_UART_IRQHandler(&huart2);
+  /* USER CODE BEGIN USART2_IRQn 1 */
+	HAL_UART_Receive_IT(&huart2,(uint8_t *)&DrivingReceive,1);
+	memcpy(&drivingType,&DrivingReceive,1);
+	memset(&DrivingReceive,0,1);
+  DrivingType_Handler();
+  /* USER CODE END USART2_IRQn 1 */
 }
 
 /**
@@ -229,18 +250,56 @@ void UART4_IRQHandler(void)
 	if(__HAL_UART_GET_FLAG(&huart4,UART_FLAG_IDLE) != RESET)
 	{	
 		rxConut = 0;
-		__HAL_UART_CLEAR_IDLEFLAG(&huart1);
+		__HAL_UART_CLEAR_IDLEFLAG(&huart4);
 		__HAL_UART_DISABLE_IT(&huart4,UART_IT_IDLE);
 		
-		memcpy(&receiveData,&rxBuffer,RX_BUFFER_SIZE);
-		memset(&rxBuffer,0,RX_BUFFER_SIZE);
+		memcpy(&receiveData,rxBuffer,RX_BUFFER_SIZE);
+		memset(rxBuffer,0,RX_BUFFER_SIZE);
+
 	}
   /* USER CODE END UART4_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
+
+uint16_t point1;
+uint8_t state = 0;
+uint8_t length;
+uint8_t i=0;
+
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
+	
+		if(huart == &huart1)
+		{
+				if(GPS_data == '$')
+				{
+					point1 = 0;	
+				}
+				GPS_Frame[point1++] = GPS_data;
+				
+				if(GPS_Frame[0] == '$' && GPS_Frame[4] == 'M' && GPS_Frame[5] == 'C')			//确定是否收到"GPRMC/GNRMC"这一帧数据
+				{
+					if(GPS_data == '\n')									   
+					{
+						memset(GPS.GPS_Buffer, 0, GPS_Buffer_Length);      //清空
+						memcpy(GPS.GPS_Buffer, GPS_Frame, point1); 	//保存数据
+						GPS.isGetData = true;
+						point1 = 0;
+						memset(GPS_Frame, 0, USART_REC_LEN);      //清空				
+					}	
+							
+				}
+				
+				if(point1 >= USART_REC_LEN)
+				{
+					point1 = USART_REC_LEN;
+				}	
+					
+		}
+		
+		
 		if(huart->Instance == UART4)
 		{
 

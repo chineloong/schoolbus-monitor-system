@@ -26,7 +26,7 @@ const char http_response[]="AT+HTTPHD=\"Connection:close\"\r\n";
 const char http_time[]="AT+HTTPTM=\"10\"\r\n";
 const char ATO[]="ATO\r\n";
 
-// 串口发送数据函数
+// 串口发送数据函数const char *
 void Net_send(const char* data) 
 {
     // 将要发送的数据拷贝到发送缓冲区

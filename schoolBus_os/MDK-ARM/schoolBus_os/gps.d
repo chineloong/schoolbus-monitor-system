@@ -34,3 +34,4 @@ schoolbus_os\gps.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 schoolbus_os\gps.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 schoolbus_os\gps.o: D:\keil5\ARM\ARMCC\Bin\..\include\math.h
 schoolbus_os\gps.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+schoolbus_os\gps.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h

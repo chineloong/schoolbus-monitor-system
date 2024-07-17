@@ -46,10 +46,9 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-
+osThreadId GPS_TaskHandle;
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
-osThreadId GPS_TaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */

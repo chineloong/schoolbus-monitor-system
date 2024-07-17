@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "4G.h"
+#include "DrivingTask.h"
 char AT[]="ATO\r\n";
 /* USER CODE END Includes */
 
@@ -97,7 +98,9 @@ int main(void)
   MX_UART4_Init();
   /* USER CODE BEGIN 2 */
 	
-	Net_Config();
+	HAL_Delay(100);
+	//Net_Config();
+	DrivingTask_Init();
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

@@ -46,4 +46,4 @@ schoolbus_os\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queu
 schoolbus_os\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 schoolbus_os\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 schoolbus_os\freertos.o: ../Hardware/4G.h
-schoolbus_os\freertos.o: ..\MyTask\GPS_Task.h
+schoolbus_os\freertos.o: ../MyTask/GPS_Task.h

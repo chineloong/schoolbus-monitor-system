@@ -39,6 +39,7 @@
 "schoolbus_os\nfc.o"
 "schoolbus_os\sr04.o"
 "schoolbus_os\gps_task.o"
+"schoolbus_os\drivingtask.o"
 --strict --scatter "schoolBus_os\schoolBus_os.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

@@ -57,6 +57,14 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define Net_Tx_Pin GPIO_PIN_0
+#define Net_Tx_GPIO_Port GPIOA
+#define Net_Rx_Pin GPIO_PIN_1
+#define Net_Rx_GPIO_Port GPIOA
+#define BLE_Tx_Pin GPIO_PIN_2
+#define BLE_Tx_GPIO_Port GPIOA
+#define BLE_Rx_Pin GPIO_PIN_3
+#define BLE_Rx_GPIO_Port GPIOA
 #define supersonic_echo_Pin GPIO_PIN_9
 #define supersonic_echo_GPIO_Port GPIOE
 #define superrsonic_tirgger_Pin GPIO_PIN_10
