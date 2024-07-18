@@ -1,12 +1,12 @@
 #include "nfc.h"
 #include "string.h"
-extern UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef huart3;
 
 const uint8_t nfc_readack[]={00, 00 ,0xFF ,0x0C ,0xF4};
 
 uint8_t nfcdata;
-uint8_t nfc_frame[50]={0};
-uint8_t nfcRecv[50]={0};
+uint8_t nfc_frame[100]={0};
+uint8_t nfcRecv[100]={0};
 
 //∑¢ÀÕ√¸¡Ó
 const uint8_t nfc_start[24]={0x55,0x55,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0x03,0xFD,0xD4,0x14,0x01,0x17,0x00,};
@@ -33,10 +33,11 @@ uint32_t swap_endian_32(uint32_t val) {
 //º§ªÓnfcƒ£øÈ
 void nfc_WakeUp(void)
 {
+	HAL_UART_Receive_IT(&huart3,(uint8_t *)&nfcdata,1);
 	mynfc.Card_ID = 0;
 	mynfc.lastCardID = 0;
 	mynfc.sumCard = 0;
-	HAL_UART_Transmit(&huart2,&nfc_start[0],24,100);
+	HAL_UART_Transmit(&huart3,&nfc_start[0],24,100);
 
 }
 
@@ -45,9 +46,9 @@ void nfc_WakeUp(void)
 void nfc_findCard(void)
 {
 	uint32_t ID;
-	HAL_UART_Transmit(&huart2,&nfc_find[0],11,100);
+	HAL_UART_Transmit(&huart3,&nfc_find[0],11,100);
 	nfc = find;
-	HAL_UART_Receive_IT(&huart2,&nfc_frame[0],25);
+	HAL_UART_Receive_IT(&huart3,(uint8_t *)&nfcdata,1);
 	mynfc.lastCardID = mynfc.Card_ID;
 	memcpy(&ID,&nfcRecv[13],4);
 	ID = swap_endian_32(ID);
@@ -62,11 +63,33 @@ void nfc_findCard(void)
 
 }
 
+enum nfc_order laststate = find;
+void CardID_Handler(void)
+{
+
+		if(memcmp(&nfc_frame[0],&nfc_reply[0],5) == 0)
+		{
+			laststate = nfc;
+			nfc = loss;
+
+		}
+		if(memcmp(&nfc_frame[0],&nfc_readack[0],5) == 0)
+		{
+			memcpy(&nfcRecv[0],&nfc_frame[0],100);
+			laststate = nfc;
+			nfc = read;
+		}
+
+
+		memset(nfc_frame,0x00,100);
+
+
+}
 //void nfc_readCard(void)
 //{
 //		//∑¢ÀÕ∂¡ø®÷∏¡Ó
-//		HAL_UART_Transmit(&huart2,&nfc_read[0],15,100);
-//		HAL_UART_Receive_IT(&huart2,&nfc_frame[0],25);
+//		HAL_UART_Transmit(&huart3,&nfc_read[0],15,100);
+//		HAL_UART_Receive_IT(&huart3,&nfc_frame[0],25);
 //		//nfc = find;
 
 //}

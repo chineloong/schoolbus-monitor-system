@@ -22,7 +22,6 @@ void GPS_Send(void)
     
    if(GPS.isUsefull)//
    {
-       //size = snprintf(msg,100,"!%f,%f,%f",100.00f,200.1f,100.0f);
        sprintf(msg,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
        //size = snprintf(msg,100,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
        Net_send(msg);

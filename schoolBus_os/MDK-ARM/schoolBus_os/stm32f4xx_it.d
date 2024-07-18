@@ -43,5 +43,6 @@ schoolbus_os\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/
 schoolbus_os\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
 schoolbus_os\stm32f4xx_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 schoolbus_os\stm32f4xx_it.o: ../Hardware/4G.h
+schoolbus_os\stm32f4xx_it.o: ../Hardware/nfc.h
 schoolbus_os\stm32f4xx_it.o: ../MyTask/DrivingTask.h
 schoolbus_os\stm32f4xx_it.o: ../Hardware/GPS.h

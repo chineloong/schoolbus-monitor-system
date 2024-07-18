@@ -675,6 +675,11 @@
               <FileType>1</FileType>
               <FilePath>..\MyTask\DrivingTask.c</FilePath>
             </File>
+            <File>
+              <FileName>NFC_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyTask\NFC_Task.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

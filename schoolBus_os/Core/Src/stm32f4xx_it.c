@@ -26,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 #include "string.h"
 #include "4G.h"
+#include "nfc.h"
 #include "DrivingTask.h"
 #include "GPS.h"
 
@@ -38,7 +39,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-int rxConut=0;
+int NetRxCount=0;
+int NFCRxCount=0;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -69,6 +71,7 @@ extern UART_HandleTypeDef huart4;
 extern UART_HandleTypeDef huart5;
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef huart3;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -253,6 +256,30 @@ void USART2_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles USART3 global interrupt.
+  */
+void USART3_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART3_IRQn 0 */
+
+  /* USER CODE END USART3_IRQn 0 */
+  HAL_UART_IRQHandler(&huart3);
+  /* USER CODE BEGIN USART3_IRQn 1 */
+	HAL_UART_Receive_IT(&huart3,(uint8_t *)&nfcdata,1);
+	//空闲中断
+	if(__HAL_UART_GET_FLAG(&huart3,UART_FLAG_IDLE) != RESET)
+	{	
+		NFCRxCount = 0;
+		__HAL_UART_CLEAR_IDLEFLAG(&huart3);
+		__HAL_UART_DISABLE_IT(&huart3,UART_IT_IDLE);
+		
+		CardID_Handler();
+
+	}
+  /* USER CODE END USART3_IRQn 1 */
+}
+
+/**
   * @brief This function handles DMA1 stream7 global interrupt.
   */
 void DMA1_Stream7_IRQHandler(void)
@@ -280,7 +307,7 @@ void UART4_IRQHandler(void)
 	//空闲中断
 	if(__HAL_UART_GET_FLAG(&huart4,UART_FLAG_IDLE) != RESET)
 	{	
-		rxConut = 0;
+		NetRxCount = 0;
 		__HAL_UART_CLEAR_IDLEFLAG(&huart4);
 		__HAL_UART_DISABLE_IT(&huart4,UART_IT_IDLE);
 		
@@ -344,12 +371,21 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 					
 		}
 		
+		//NFC接收
+		if(huart->Instance == USART3)
+		{
+
+				nfc_frame[NFCRxCount] = nfcdata;
+				NFCRxCount++;
+				__HAL_UART_ENABLE_IT(&huart3,UART_IT_IDLE);
+		}
 		
+		//4G接收
 		if(huart->Instance == UART4)
 		{
 
-				rxBuffer[rxConut] = rxData;
-				rxConut++;
+				rxBuffer[NetRxCount] = rxData;
+				NetRxCount++;
 				__HAL_UART_ENABLE_IT(&huart4,UART_IT_IDLE);
 		}
 

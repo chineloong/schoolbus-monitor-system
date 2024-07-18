@@ -28,7 +28,8 @@
 /* USER CODE BEGIN Includes */
 #include "4G.h"
 #include "DrivingTask.h"
-char AT[]="ATO\r\n";
+#include "nfc.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -38,7 +39,6 @@ char AT[]="ATO\r\n";
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -77,7 +77,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-   HAL_Init();
+  HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -102,12 +102,18 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	
 	HAL_Delay(100);
-	//HAL_UART_Receive_IT(&huart4,(uint8_t *)&rxData,1);
-	Net_Config();
+	
+	//4G模块初始化
+	//Net_Config();
+	
+	//NFC初始化
+	nfc_WakeUp();
+	
+	//驾驶违规初始化
 	DrivingTask_Init();
 	//Init_voicemodule();
   /* USER CODE END 2 */
-	
+
   /* Call init function for freertos objects (in freertos.c) */
   MX_FREERTOS_Init();
 

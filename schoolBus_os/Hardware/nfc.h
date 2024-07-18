@@ -5,8 +5,8 @@
 
 extern uint8_t nfcdata;
 extern const uint8_t nfc_readack[];
-extern uint8_t nfc_frame[50];
-extern uint8_t nfcRecv[50];
+extern uint8_t nfc_frame[100];
+extern uint8_t nfcRecv[100];
 extern const uint8_t nfc_reply[];
 extern struct nfc_data mynfc;
 
@@ -31,7 +31,10 @@ struct nfc_data{
 
 
 extern enum nfc_order nfc;
+extern enum nfc_order laststate;
+
 
 void nfc_WakeUp(void);
 void nfc_findCard(void);
+void CardID_Handler(void);
 #endif

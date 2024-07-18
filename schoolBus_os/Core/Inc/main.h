@@ -73,6 +73,10 @@ void Error_Handler(void);
 #define supersonic2_echo_GPIO_Port GPIOE
 #define superrsonic2_tirgger_Pin GPIO_PIN_12
 #define superrsonic2_tirgger_GPIO_Port GPIOE
+#define NFC_Tx_Pin GPIO_PIN_10
+#define NFC_Tx_GPIO_Port GPIOB
+#define NFC_Rx_Pin GPIO_PIN_11
+#define NFC_Rx_GPIO_Port GPIOB
 #define GPS_Tx_Pin GPIO_PIN_9
 #define GPS_Tx_GPIO_Port GPIOA
 #define GPS_Rx_Pin GPIO_PIN_10

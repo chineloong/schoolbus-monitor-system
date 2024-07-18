@@ -51,3 +51,4 @@ schoolbus_os\main.o: ../Core/Inc/usart.h
 schoolbus_os\main.o: ../Core/Inc/gpio.h
 schoolbus_os\main.o: ../Hardware/4G.h
 schoolbus_os\main.o: ../MyTask/DrivingTask.h
+schoolbus_os\main.o: ../Hardware/nfc.h
