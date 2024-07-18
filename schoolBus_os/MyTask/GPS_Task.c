@@ -4,6 +4,8 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "4G.h"
+#include "SR04.h"
+
 
 extern UART_HandleTypeDef huart1;
 float test = 110.1f;
@@ -42,11 +44,12 @@ void GPS_Task(void* pvParameters)
 {
 	
 		HAL_UART_Receive_IT(&huart1,&GPS_data,1);
-	
+		SR04_Init();
     while(1)
     {
         // Add your code here
         parseGpsBuffer();
+				SR04_GetData();
         GPS_Send();
         vTaskDelay(200);
     }

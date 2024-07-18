@@ -20,10 +20,10 @@ void SR04_GetData(void)
 {	
 	if(SR04.measure_state1 == 0)
 	{
-			//TRIG_H;
+			TRIG_H;
 			for(int i=0;i<720;i++)
 				__NOP();
-			//TRIG_L;
+			TRIG_L;
 
 			__HAL_TIM_SET_CAPTUREPOLARITY(&htim1, TIM_CHANNEL_1, TIM_INPUTCHANNELPOLARITY_RISING);
 			HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_1);	//启动输入捕获 
@@ -31,10 +31,10 @@ void SR04_GetData(void)
 	}
 	if(SR04.measure_state2 == 0)
 	{
-			//TRIG2_H;
+			TRIG2_H;
 			for(int i=0;i<720;i++)
 				__NOP();
-			//TRIG2_L;
+			TRIG2_L;
 
 			__HAL_TIM_SET_CAPTUREPOLARITY(&htim1, TIM_CHANNEL_2, TIM_INPUTCHANNELPOLARITY_RISING);
 			HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_2);	//启动输入捕获   

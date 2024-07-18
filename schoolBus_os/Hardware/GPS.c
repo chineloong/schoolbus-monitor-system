@@ -6,7 +6,7 @@
 #include "string.h"
 
 
-extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart5;
 
 uint8_t GPS_Frame[USART_REC_LEN];
 uint8_t GPS_data;

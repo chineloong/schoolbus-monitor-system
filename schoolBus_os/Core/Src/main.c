@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "dma.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -76,7 +77,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+   HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -91,18 +92,22 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_TIM1_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
   MX_UART4_Init();
+  MX_UART5_Init();
   /* USER CODE BEGIN 2 */
 	
 	HAL_Delay(100);
-	//Net_Config();
+	//HAL_UART_Receive_IT(&huart4,(uint8_t *)&rxData,1);
+	Net_Config();
 	DrivingTask_Init();
+	//Init_voicemodule();
   /* USER CODE END 2 */
-
+	
   /* Call init function for freertos objects (in freertos.c) */
   MX_FREERTOS_Init();
 

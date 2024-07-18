@@ -4,10 +4,10 @@
 #include "tim.h"
 #include "stdio.h"
  
-//#define TRIG_H  HAL_GPIO_WritePin(first_supersonic_GPIO_Port,first_supersonic_Pin,GPIO_PIN_SET)
-//#define TRIG_L  HAL_GPIO_WritePin(first_supersonic_GPIO_Port,first_supersonic_Pin,GPIO_PIN_RESET)
-//#define TRIG2_H  HAL_GPIO_WritePin(second_supersonic_GPIO_Port,second_supersonic_Pin,GPIO_PIN_SET)
-//#define TRIG2_L  HAL_GPIO_WritePin(second_supersonic_GPIO_Port,second_supersonic_Pin,GPIO_PIN_RESET)
+#define TRIG_H  HAL_GPIO_WritePin(superrsonic_tirgger_GPIO_Port,superrsonic_tirgger_Pin,GPIO_PIN_SET)
+#define TRIG_L  HAL_GPIO_WritePin(superrsonic_tirgger_GPIO_Port,superrsonic_tirgger_Pin,GPIO_PIN_RESET)
+#define TRIG2_H  HAL_GPIO_WritePin(superrsonic2_tirgger_GPIO_Port,superrsonic2_tirgger_Pin,GPIO_PIN_SET)
+#define TRIG2_L  HAL_GPIO_WritePin(superrsonic2_tirgger_GPIO_Port,superrsonic2_tirgger_Pin,GPIO_PIN_RESET)
 
 struct SR04
 {

@@ -43,3 +43,6 @@ schoolbus_os\gps_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_
 schoolbus_os\gps_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 schoolbus_os\gps_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
 schoolbus_os\gps_task.o: ../Hardware/4G.h
+schoolbus_os\gps_task.o: ../Hardware/SR04.h
+schoolbus_os\gps_task.o: ../Core/Inc/main.h
+schoolbus_os\gps_task.o: ../Core/Inc/tim.h

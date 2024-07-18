@@ -3,6 +3,7 @@
 "schoolbus_os\main.o"
 "schoolbus_os\gpio.o"
 "schoolbus_os\freertos.o"
+"schoolbus_os\dma.o"
 "schoolbus_os\tim.o"
 "schoolbus_os\usart.o"
 "schoolbus_os\stm32f4xx_it.o"
