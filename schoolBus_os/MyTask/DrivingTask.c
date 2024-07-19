@@ -46,7 +46,7 @@ void DrivingType_Handler(void)
         {
             char sleepChar[3];
             sprintf(sleepChar, "%d", Sleep);
-            Net_send(sleepChar);
+            Net_sendChar(sleepChar);
             sum = 0;
         }
 
@@ -54,7 +54,7 @@ void DrivingType_Handler(void)
         {
             char phoneChar[3];
             sprintf(phoneChar, "%d", Phone);
-            Net_send(phoneChar);
+            Net_sendChar(phoneChar);
             sum = 0;
         }
     }

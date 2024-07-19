@@ -12,7 +12,8 @@ extern char rxBuffer[RX_BUFFER_SIZE];
 extern uint8_t rxData;
 extern char receiveData[RX_BUFFER_SIZE];
 
-void Net_send(const char* data);
+void Net_sendChar(const char* data);
+void Net_send(char* data,uint16_t size);
 void Net_Config(void);
 
 #endif

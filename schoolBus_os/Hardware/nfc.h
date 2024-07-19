@@ -23,9 +23,8 @@ enum nfc_checkflag{
 };
 
 struct nfc_data{
-	uint32_t Card_ID;
+	uint32_t CardID;
 	int16_t sumCard;
-	uint32_t lastCardID;
 };
 
 

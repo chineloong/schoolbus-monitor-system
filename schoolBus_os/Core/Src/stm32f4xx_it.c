@@ -29,7 +29,7 @@
 #include "nfc.h"
 #include "DrivingTask.h"
 #include "GPS.h"
-
+#include "voiceMiddleware.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -328,7 +328,8 @@ void UART5_IRQHandler(void)
   /* USER CODE END UART5_IRQn 0 */
   HAL_UART_IRQHandler(&huart5);
   /* USER CODE BEGIN UART5_IRQn 1 */
-
+	
+	//voice_packer.restart_idle_packrecv_();
   /* USER CODE END UART5_IRQn 1 */
 }
 
@@ -388,6 +389,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 				NetRxCount++;
 				__HAL_UART_ENABLE_IT(&huart4,UART_IT_IDLE);
 		}
-
+		if (huart->Instance == UART5)
+		{			
+					voice_packer.voice_cmd_complete = 1;
+    }
 }
 /* USER CODE END 1 */

@@ -660,6 +660,11 @@
               <FileType>1</FileType>
               <FilePath>..\Hardware\SR04.c</FilePath>
             </File>
+            <File>
+              <FileName>voiceMiddleware.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\voiceMiddleware.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

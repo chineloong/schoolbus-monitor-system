@@ -1,6 +1,12 @@
 #include "nfc.h"
 #include "string.h"
+#include "4G.h"
+#include "stdio.h"
+
+
 extern UART_HandleTypeDef huart3;
+extern UART_HandleTypeDef huart4;
+
 
 const uint8_t nfc_readack[]={00, 00 ,0xFF ,0x0C ,0xF4};
 
@@ -34,30 +40,28 @@ uint32_t swap_endian_32(uint32_t val) {
 void nfc_WakeUp(void)
 {
 	HAL_UART_Receive_IT(&huart3,(uint8_t *)&nfcdata,1);
-	mynfc.Card_ID = 0;
-	mynfc.lastCardID = 0;
+	mynfc.CardID = 0;
 	mynfc.sumCard = 0;
 	HAL_UART_Transmit(&huart3,&nfc_start[0],24,100);
 
 }
 
-
+static int Net_TrasformFlag = 0;
 //读取卡号
 void nfc_findCard(void)
 {
-	uint32_t ID;
+	
 	HAL_UART_Transmit(&huart3,&nfc_find[0],11,100);
 	nfc = find;
 	HAL_UART_Receive_IT(&huart3,(uint8_t *)&nfcdata,1);
-	mynfc.lastCardID = mynfc.Card_ID;
-	memcpy(&ID,&nfcRecv[13],4);
-	ID = swap_endian_32(ID);
 	
-	if(ID!=mynfc.lastCardID)
+	
+	if(Net_TrasformFlag == 1)
 	{
-			mynfc.Card_ID = ID;
-			mynfc.sumCard++;
-			nfcflag = checked;
+		char msg[100];
+		int size = snprintf(msg,100,"@%u",mynfc.CardID);
+		Net_send(msg,size);
+		Net_TrasformFlag =  0;
 	}
 	
 
@@ -67,23 +71,35 @@ enum nfc_order laststate = find;
 void CardID_Handler(void)
 {
 
-		if(memcmp(&nfc_frame[0],&nfc_reply[0],5) == 0)
+	if (memcmp(&nfc_frame[0], &nfc_reply[0], 5) == 0)
+	{
+		laststate = nfc;
+		nfc = loss;
+	}
+	//通过读卡帧头验证
+	if (memcmp(&nfc_frame[0], &nfc_readack[0], 5) == 0)
+	{
+		memcpy(&nfcRecv[0], &nfc_frame[0], 100);
+		laststate = nfc;
+		nfc = read;
+
+		uint32_t ID;
+		memcpy(&ID, &nfcRecv[13], 4);
+		ID = swap_endian_32(ID);
+
+		//确认获取到一张新卡
+		if (ID != mynfc.CardID)
 		{
-			laststate = nfc;
-			nfc = loss;
-
+			//更新卡号和计数
+			mynfc.CardID = ID;
+			mynfc.sumCard++;
+			nfcflag = checked;
+			
+			Net_TrasformFlag = 1;
 		}
-		if(memcmp(&nfc_frame[0],&nfc_readack[0],5) == 0)
-		{
-			memcpy(&nfcRecv[0],&nfc_frame[0],100);
-			laststate = nfc;
-			nfc = read;
-		}
+	}
 
-
-		memset(nfc_frame,0x00,100);
-
-
+	memset(nfc_frame, 0x00, 100);
 }
 //void nfc_readCard(void)
 //{

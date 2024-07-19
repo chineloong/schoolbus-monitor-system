@@ -29,7 +29,7 @@
 #include "4G.h"
 #include "DrivingTask.h"
 #include "nfc.h"
-
+#include "voiceMiddleware.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -104,11 +104,14 @@ int main(void)
 	HAL_Delay(100);
 	
 	//4G模块初始化
+	HAL_UART_Receive_IT(&huart4,(uint8_t *)&rxData,1);
 	//Net_Config();
 	
 	//NFC初始化
 	nfc_WakeUp();
 	
+	
+	Init_voicemodule();
 	//驾驶违规初始化
 	DrivingTask_Init();
 	//Init_voicemodule();

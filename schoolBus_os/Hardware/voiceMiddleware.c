@@ -4,30 +4,33 @@
   * @brief           : 
   * @author          : 
   ******************************************************************************
-  * @attention			 £ºÎŞ
+  * @attention			 ï¿½ï¿½ï¿½ï¿½
   *
   ******************************************************************************
   */
 /* USER CODE END Header */
 #include "voiceMiddleware.h"
 #include <string.h>
+#include <stdio.h>
 
 extern UART_HandleTypeDef huart5;
-extern UART_HandleTypeDef huart2;
-extern DMA_HandleTypeDef hdma_usart2_rx;
+
+/* ä¸ç”¨ç®¡ */
 	
 Voice_packer voice_packer;
 
-/* Ô¤°üº¬µÄ»° */
-#define init_length 								14				//Éè±¸³õÊ¼»¯Íê³É
-#define children_leavebus_length		12				//Ğ¡ÅóÓÑÇëÏÂ³µ
-#define robomaster_length						20				//»ú¼×´óÊ¦Æô¶¯
+Txt_recv text_recv = {0};
+
+/* é¢„åŒ…å«çš„è¯ */
+#define init_length 								14			//è®¾å¤‡åˆå§‹åŒ–å®Œæˆ
+#define children_leavebus_length		12			//å°æœ‹å‹è¯·ä¸‹è½¦
+#define robomaster_length						24			//æœºç”²å¤§å¸ˆå¯åŠ¨
 uint8_t GB_deviceok[14] = {0xC9, 0xE8, 0xB1, 0xB8, 0xB3, 0xF5, 0xCA, 0xBC,0xBB, 0xAF, 0xCD, 0xEA, 0xB3, 0xC9};
 uint8_t GB_ChildrenPleaseLeaveBus[12] = {0xD0,0xA1,0xC5,0xF3,0xD3,0xD1,0xC7,0xEB,0xCF,0xC2,0xB3,0xB5};
-uint8_t GB_Robomaster_Start[20] = {0xBB,0xFA,0xBC,0xD7,0xB4,0xF3,0xCA,0xA6,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0xC6,0xF4,0xB6,0xAF};
+uint8_t GB_Robomaster_Start[24] = {0xBB,0xB6,0xD3,0xAD,0xCA,0xB9,0xD3,0xC3,0xD0,0xA3,0xB3,0xB5,0xD6,0xC7,0xC4,0xDC,0xB0,0xB2,0xC8,0xAB,0xCF,0xB5,0xCD,0xB3};
 
 /**
-	* @brief          ³õÊ¼»¯ÓïÑÔ¿â
+	* @brief          åˆå§‹åŒ–è¯­è¨€åº“
   * @param[in]      none
   * @retval         none
   */
@@ -39,7 +42,7 @@ void Init_sentenselib(void)
 }
 
 /**
-	* @brief          ·¢ËÍÖ¸¶¨»°Óï
+	* @brief          å‘é€æŒ‡å®šè¯è¯­
   * @param[in]      none
   * @retval         none
   */
@@ -47,42 +50,45 @@ void voicepacker_send(void)
 {
 	switch(voice_packer.voicepack_init_done){
 		case 0:	
-			//µÃµ½ÎÄ±¾³¤¶È
+			//å¾—åˆ°æ–‡æœ¬é•¿åº¦
 			voice_packer.text_length = robomaster_length;	
-			/* ±ê×¼²Ù×÷²»ÓÃ¸Ä */
+			//æ‹·è´æ–‡æœ¬
 			voice_packer.data_length = _CMD_LENGTH + _ENCODE_LENGTH + voice_packer.text_length;
 			voice_packer.frame_buf[0] = _FRAME_HEADER;
 			voice_packer.frame_buf[1] = (uint8_t)(voice_packer.data_length>>8)&0x00FF;
 			voice_packer.frame_buf[2] = (uint8_t)(voice_packer.data_length)&0x00FF;
 			voice_packer.frame_buf[3] = 0x01;
 			voice_packer.frame_buf[4] = 0x01;		
-			//¿½±´ÎÄ±¾
+			//æ‹·è´æ–‡æœ¬
 			memcpy(&(voice_packer.frame_buf[5]),voice_packer.sentenselib.robomaster,voice_packer.text_length );
-			/* ±ê×¼²Ù×÷²»ÓÃ¸Ä */
+			/* æ ‡å‡†æ“ä½œä¸ç”¨æ”¹ */
 			HAL_UART_Receive_IT(voice_packer.pHUSARTx, &voice_packer.Recv_command , 1);
 			HAL_UART_Transmit_DMA(voice_packer.pHUSARTx,voice_packer.frame_buf,(voice_packer.data_length +_FRAME_LENGTH+_DATA_LENGTH));		
-
-				
-			
+			HAL_Delay(10);
+			if( (voice_packer.voice_cmd_complete) == 1 )
+				voice_packer.voicepack_init_done = 1;
+					
 		break;
 		case 1:
 			voice_packer.voice_cmd_complete = (voice_packer.voice_cmd_complete==1)?0:voice_packer.voice_cmd_complete;
-			//µÃµ½ÎÄ±¾³¤¶È
+			/* æ ‡å‡†æ“ä½œä¸ç”¨æ”¹ */
 			voice_packer.text_length = voice_packer.pack_recver.sentense_length;	
-			/* ±ê×¼²Ù×÷²»ÓÃ¸Ä */
+			//å¾—åˆ°æ–‡æœ¬é•¿åº¦
 			voice_packer.data_length = _CMD_LENGTH + _ENCODE_LENGTH + voice_packer.text_length;
 			voice_packer.frame_buf[0] = _FRAME_HEADER;
 			voice_packer.frame_buf[1] = (uint8_t)(voice_packer.data_length>>8)&0x00FF;
 			voice_packer.frame_buf[2] = (uint8_t)(voice_packer.data_length)&0x00FF;
 			voice_packer.frame_buf[3] = 0x01;
 			voice_packer.frame_buf[4] = 0x01;		
-			//¿½±´ÎÄ±¾
+			//å¾—åˆ°æ–‡æœ¬çœŸå®æ•°æ®
 			memcpy(&(voice_packer.frame_buf[5]),voice_packer.pack_recver.gb_sentense,voice_packer.text_length );
-			/* ±ê×¼²Ù×÷²»ÓÃ¸Ä */
+			/* æ ‡å‡†æ“ä½œä¸ç”¨æ”¹ */
 			HAL_UART_Receive_IT(voice_packer.pHUSARTx, &voice_packer.Recv_command , 1);
 			HAL_UART_Transmit_DMA(voice_packer.pHUSARTx,voice_packer.frame_buf,(voice_packer.data_length +_FRAME_LENGTH+_DATA_LENGTH));				
+			HAL_Delay(10);
+			if( (voice_packer.voice_cmd_complete) == 1 )
+				return;
 			
-
 		break;
 		default:
 		break;
@@ -91,7 +97,27 @@ void voicepacker_send(void)
 
 
 /**
-	* @brief          ³õÊ¼»¯ÓïÒôÄ£¿éÓ²¼ş²¢¼ì²â·¢ËÍÊÇ·ñ³É¹¦
+* @brief          ï¿½ï¿½ï¿½Í¶ï¿½Ó¦ï¿½Ö·ï¿½ï¿½ï¿½
+  * @param[in]      none
+  * @retval         none
+  */
+void Voice_Sendmsg(uint8_t *text_buffer,uint32_t sentense_length)
+{
+	voice_packer.start_transmit();
+	if( voice_packer.sendmsg_start == 1 ){
+		
+		voice_packer.pack_recver.sentense_length = sentense_length;
+		memset(voice_packer.pack_recver.gb_sentense,0,_TEXT_MAX_LENGTH);
+		memcpy(	voice_packer.pack_recver.gb_sentense,\
+						text_buffer,\
+						voice_packer.pack_recver.sentense_length);
+		voice_packer.voicepack_send_();		
+	}	
+}
+
+
+/**
+	* @brief          ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â·¢ï¿½ï¿½ï¿½Ç·ï¿½É¹ï¿½
   * @param[in]      none
   * @retval         none
   */
@@ -99,54 +125,22 @@ void Init_voicemodule(void)
 {
 	Init_sentenselib();
 	
-	voice_packer.pack_recver.pHUSARTx = &huart2;
-	voice_packer.pack_recver.pHDMArx = &hdma_usart2_rx;
 	voice_packer.pHUSARTx = &huart5;
+	
 	voice_packer.clr_voicemodule_recvflag_ = Voice_completeflagClear;
 	voice_packer.restart_idle_packrecv_ = Restart_dmaIDLErecv;
 	voice_packer.voicepack_send_ = voicepacker_send; 
+	voice_packer.start_transmit = VoiceMsg_start;
+	voice_packer.clearvoice = VoiceMsg_clear;
 	
-	voicepacker_send();//·¢ËÍÍ¨ĞÅ¼ì²â(µÚÒ»´Î·¢ËÍ»½ĞÑ)
+	voicepacker_send();//ï¿½ï¿½ï¿½ï¿½Í¨ï¿½Å¼ï¿½ï¿½(ï¿½ï¿½Ò»ï¿½Î·ï¿½ï¿½Í»ï¿½ï¿½ï¿½)
 	
-	HAL_Delay(10);
-	if( (voice_packer.voice_cmd_complete) == 1 )
-		voice_packer.voicepack_init_done = 1;
-
-	HAL_UARTEx_ReceiveToIdle_DMA(voice_packer.pack_recver.pHUSARTx,voice_packer.pack_recver.recvbuf,_TEXT_MAX_LENGTH);//IDLE½ÓÊÕ
+	//HAL_UARTEx_ReceiveToIdle_DMA(voice_packer.pack_recver.pHUSARTx,voice_packer.pack_recver.recvbuf,_TEXT_MAX_LENGTH);//IDLEï¿½ï¿½ï¿½ï¿½
 	
 	HAL_Delay(10);
 }
 
 
-/**
-	* @brief          call-back
-  * @param[in]      none
-  * @retval         none
-  */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-    if (huart->Instance == USART1) {
-				
-//			if( voice_packer.Recv_command == (uint8_t)COMMAND_CORRRECT )
-					voice_packer.voice_cmd_complete = 1;
-				HAL_UART_Receive_IT(voice_packer.	pHUSARTx, &voice_packer.Recv_command , 1 );
-    }
-
-}
-
-void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
-{
-    if (huart->Instance == USART2) {
-		
-				/* ¶ÁÈ¡Êı¾İ */
-				HAL_UART_DMAStop(huart);
-				voice_packer.pack_recver.sentense_length =  _TEXT_MAX_LENGTH -  __HAL_DMA_GET_COUNTER(voice_packer.pack_recver.pHDMArx);
-				voice_packer.pack_recver.recvd = 1;
-				/* ÖØÆôdmaĞ´ÔÚIRQÖĞ */
-			//ÖØÆôdma IDLE
-    }		
-	
-	
-}
 
 
 
@@ -156,7 +150,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 }
 
 /**
-	* @brief          ×Ô¶¯Çå³ı½ÓÊÕÍê³Éflag
+	* @brief          ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½flag
   * @param[in]      none
   * @retval         none
   */
@@ -168,14 +162,76 @@ void Voice_completeflagClear(void)
 
 
 /**
-	* @brief          ÖØĞÂÆô¶¯dma½ÓÊÕ
+	* @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½dmaï¿½ï¿½ï¿½ï¿½
   * @param[in]      none
   * @retval         none
   */
 void Restart_dmaIDLErecv(void)
 {
-	HAL_UARTEx_ReceiveToIdle_DMA(voice_packer.pack_recver.pHUSARTx,voice_packer.pack_recver.recvbuf,_TEXT_MAX_LENGTH);//IDLE½ÓÊÕ	
+	HAL_UARTEx_ReceiveToIdle_DMA(voice_packer.pack_recver.pHUSARTx,voice_packer.pack_recver.recvbuf,_TEXT_MAX_LENGTH);//IDLEï¿½ï¿½ï¿½ï¿½	
 }
 
+/**
+	* @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½é·¢ï¿½ï¿½
+  * @param[in]      none
+  * @retval         none
+  */
+void VoiceMsg_start(void)
+{
+	voice_packer.sendmsg_start ++;
+	
+}
 
+/**
+* @brief          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½é·¢ï¿½ï¿½
+  * @param[in]      none
+  * @retval         none
+  */
+void VoiceMsg_clear(void)
+{
+	voice_packer.sendmsg_start = 0;
+	memset(text_recv.text_buffer,0x00,_TEXT_MAX_LENGTH);
+	memset(voice_packer.pack_recver.gb_sentense,0x00,voice_packer.pack_recver.sentense_length);
+	memset(voice_packer.frame_buf,0x00,_TEXT_MAX_LENGTH);
+}
 
+/**
+* @brief         è‡ªå®šä¹‰å‘é€è¯­éŸ³
+* @param[in]      none
+* @retval         none
+*/
+uint8_t word_seq;
+void Broadcast(char * msg,uint8_t sendType)
+{
+		switch(sendType)
+		{
+			case 1:
+				
+				sprintf((char *)text_recv.text_buffer,"%s",msg);
+				
+				/* å¿…é¡»ç´§è·Ÿsprintf(å¤åˆ¶ç²˜è´´å³å¯) */
+				//æ±‚sentence length
+				// text_recv.buffer_size = sizeof(text_recv.text_buffer)/sizeof(text_recv.text_buffer[0])-1;
+				text_recv.buffer_size = strlen(msg);
+				
+				if( text_recv.text_buffer[text_recv.buffer_size-1] == 0 ){
+					text_recv.sentense_length = strlen((const char *)text_recv.text_buffer);
+				}
+				else
+					text_recv.sentense_length = text_recv.buffer_size;	
+				//æ‰§è¡Œå•æ¬¡å‘é€
+				Voice_Sendmsg(text_recv.text_buffer,text_recv.sentense_length);	
+				/* ---------å¤åˆ¶ç²˜è´´ç»“æŸ---------*/
+				
+				break;
+			case 2:
+				/* å¿…é¡»å’Œsprintf ä¸åŒæ—¶æ‰§è¡Œ*/
+				voice_packer.clearvoice();
+				break;
+			
+
+			default:
+				break;
+			
+		}
+}

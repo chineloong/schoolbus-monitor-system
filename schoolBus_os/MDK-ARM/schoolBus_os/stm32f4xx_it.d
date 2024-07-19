@@ -46,3 +46,4 @@ schoolbus_os\stm32f4xx_it.o: ../Hardware/4G.h
 schoolbus_os\stm32f4xx_it.o: ../Hardware/nfc.h
 schoolbus_os\stm32f4xx_it.o: ../MyTask/DrivingTask.h
 schoolbus_os\stm32f4xx_it.o: ../Hardware/GPS.h
+schoolbus_os\stm32f4xx_it.o: ../Hardware/voiceMiddleware.h

@@ -6,25 +6,26 @@
 #include "4G.h"
 #include "SR04.h"
 
-
+#include "voiceMiddleware.h"
 extern UART_HandleTypeDef huart1;
 float test = 110.1f;
 
 
+
 /**
- * @description: 鍙戦�丟PS鏁版嵁
+ * @description: GPS数据发送
  * @return {*}
  */
 void GPS_Send(void)
 {
     char msg[100];
-    //int size;
+    int size;
     
    if(GPS.isUsefull)//
    {
-       sprintf(msg,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
-       //size = snprintf(msg,100,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
-       Net_send(msg);
+       //sprintf(msg,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
+       size = snprintf(msg,100,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
+       Net_send(msg,size);
        test++;
    }
 //		sprintf(msg,"!%f,%f,%f",100.00f,200.1f,100.0f);
@@ -36,7 +37,7 @@ void GPS_Send(void)
 
 
 /**
- * @description: FreeRTOS浠诲姟鍑芥暟锛屽彂閫丟PS鏁版嵁
+ * @description: FreeRTOS  GPS任务函数
  * @return {*}
  */
 void GPS_Task(void* pvParameters)
@@ -46,10 +47,9 @@ void GPS_Task(void* pvParameters)
 		SR04_Init();
     while(1)
     {
-        // Add your code here
         parseGpsBuffer();
-				SR04_GetData();
         GPS_Send();
+				
         vTaskDelay(200);
     }
 }

@@ -29,13 +29,24 @@ const char Restart[]="AT+Z\r\n";
 const char Transmit[]="AT+ENTM\r\n";
 
 // 串口发送数据函数const char *
-void Net_send(const char* data) 
+void Net_sendChar(const char* data) 
 {
     // 将要发送的数据拷贝到发送缓冲区
     strncpy(txBuffer, data, TX_BUFFER_SIZE);
     // 调用HAL库函数发送数据
     HAL_UART_Transmit(&huart4, (uint8_t*)txBuffer, strlen(txBuffer), HAL_MAX_DELAY);
 }
+
+// 串口发送数据函数const char *
+void Net_send(char* data,uint16_t size) 
+{
+    // 将要发送的数据拷贝到发送缓冲区
+    strncpy(txBuffer, data, size);
+    // 调用HAL库函数发送数据
+    HAL_UART_Transmit(&huart4, (uint8_t*)txBuffer, strlen(txBuffer), HAL_MAX_DELAY);
+}
+
+
 
 /**
  * @description: 进入配置模式
@@ -44,7 +55,7 @@ void Net_send(const char* data)
 void NetConfigMode(void)
 {
 		
-		Net_send(config_head);
+		Net_sendChar(config_head);
 	
 		while(strcmp(receiveData, "a") != 0)
 		{
@@ -61,7 +72,7 @@ void NetConfigMode(void)
 void NetTransformMode(void)
 {
 		char str[100];
-		Net_send(Transmit);
+		Net_sendChar(Transmit);
 		sprintf(str,"%s%s",netmode,ack);sprintf(str,"%s%s",netmode,ack);
 		while(strcmp(receiveData,str) != 0)
 		{
@@ -90,7 +101,7 @@ void Net_Config(void)
 		HAL_UART_Receive_IT(&huart4,(uint8_t *)&rxData,1);
 		HAL_Delay(100);
 	
-		Net_send(Transmit);
+		Net_sendChar(Transmit);
 		HAL_Delay(500);
 
 		char str[100];

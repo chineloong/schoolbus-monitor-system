@@ -1,4 +1,25 @@
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\keil5\ARM\ARMCC\Bin'
 Build target 'schoolBus_os'
-"schoolBus_os\schoolBus_os.axf" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:00
+compiling NFC_Task.c...
+..\MyTask\NFC_Task.c(40): error:  #101: "outofBus" has already been declared in the current scope
+  void outofBus(void)
+..\MyTask\NFC_Task.c(74): error:  #20: identifier "waiting" is undefined
+  		if(studentState == waiting && lastSum < mynfc.sumCard)
+..\MyTask\NFC_Task.c(83): error:  #20: identifier "waiting" is undefined
+              flag = waiting;
+..\MyTask\NFC_Task.c(112): warning:  #223-D: function "studentID_Send" declared implicitly
+  				studentID_Send();
+..\MyTask\NFC_Task.c(129): warning:  #223-D: function "vTaskDelay" declared implicitly
+          vTaskDelay(100);
+..\MyTask\NFC_Task.c(131): warning:  #1-D: last line of file ends without a newline
+  }
+..\MyTask\NFC_Task.c: 3 warnings, 3 errors
+compiling freertos.c...
+../Core/Src/freertos.c(112): warning:  #144-D: a value of type "void (*)(void *)" cannot be used to initialize an entity of type "os_pthread"
+    osThreadDef(GPS_Task, GPS_Task, osPriorityNormal, 0, 256);
+../Core/Src/freertos.c(114): warning:  #144-D: a value of type "void (*)(void *)" cannot be used to initialize an entity of type "os_pthread"
+    osThreadDef(NFC_Task, NFC_Task, osPriorityNormal, 0, 1024);
+../Core/Src/freertos.c: 2 warnings, 0 errors
+"schoolBus_os\schoolBus_os.axf" - 3 Error(s), 5 Warning(s).
+Target not created.
+Build Time Elapsed:  00:00:05
