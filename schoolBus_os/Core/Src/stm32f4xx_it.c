@@ -44,6 +44,7 @@
 int NetRxCount=0;
 int NFCRxCount=0;
 int broadcastmsgFlag = 0;
+int msgSendFlag = 0;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -319,6 +320,11 @@ void UART4_IRQHandler(void)
 		{
 				sprintf(broadcastmsg, "%s", &receiveData[1]);
 				broadcastmsgFlag = 1;
+		}
+		else if(receiveData[0] == 'M')
+		{
+				sprintf(msgSendFrame, "%s", &receiveData[1]);
+				msgSendFlag = 1;
 		}
 		memset(rxBuffer,0,RX_BUFFER_SIZE);
 

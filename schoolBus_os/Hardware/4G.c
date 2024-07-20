@@ -77,7 +77,7 @@ void NetConfigMode(void)
  */
 void NetTransformMode(void)
 {
-		char str[100];
+		//char str[100];
 		Net_sendChar(Transmit);
 		//sprintf(str,"%s%s",netmode,ack);sprintf(str,"%s%s",netmode,ack);
 		while(strcmp(receiveData,"\r\nOK\r\n\r\n") != 0)
@@ -110,7 +110,7 @@ void Net_Config(void)
 		Net_sendChar(Transmit);
 		HAL_Delay(500);
 
-		char str[100];
+		//char str[100];
 		
     // 判断接收到的数据是否为指定数据
     if(config_flag == 0)

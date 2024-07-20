@@ -64,7 +64,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)//
 							HAL_TIM_IC_Start_IT(&htim1,TIM_CHANNEL_1);                                    
 							break;              
 						case 2:
-							SR04.distance1 = HAL_TIM_ReadCapturedValue(&htim1,TIM_CHANNEL_1)/1000000.0f*340.0f/2.0f;//获取当前的捕获值.
+							SR04.raw_distance1 = HAL_TIM_ReadCapturedValue(&htim1,TIM_CHANNEL_1)/1000000.0f*340.0f/2.0f;//获取当前的捕获值.
 							HAL_TIM_IC_Stop_IT(&htim1,TIM_CHANNEL_1); //停止捕获   或者: __HAL_TIM_DISABLE(&htim5);
 							SR04.measure_state1 = 0;  
 															 
@@ -81,7 +81,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)//
 							HAL_TIM_IC_Start_IT(&htim1,TIM_CHANNEL_2);                                    
 							break;              
 						case 2:
-							SR04.distance2 = HAL_TIM_ReadCapturedValue(&htim1,TIM_CHANNEL_2)/1000000.0f*340.0f/2.0f;//获取当前的捕获值.
+							SR04.raw_distance2 = HAL_TIM_ReadCapturedValue(&htim1,TIM_CHANNEL_2)/1000000.0f*340.0f/2.0f;//获取当前的捕获值.
 							HAL_TIM_IC_Stop_IT(&htim1,TIM_CHANNEL_2); //停止捕获   或者: __HAL_TIM_DISABLE(&htim5);
 							SR04.measure_state2 = 0;  
 															 

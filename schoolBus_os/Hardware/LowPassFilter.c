@@ -44,4 +44,4 @@ double getFilteredData(LowPassFilter *filter) {
 // 清理资源  
 void cleanupLowPassFilter(LowPassFilter *filter) {  
     free(filter->buffer);  
-}  
+}

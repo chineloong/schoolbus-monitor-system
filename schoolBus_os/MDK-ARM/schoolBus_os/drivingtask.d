@@ -31,13 +31,15 @@ schoolbus_os\drivingtask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pw
 schoolbus_os\drivingtask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 schoolbus_os\drivingtask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 schoolbus_os\drivingtask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-schoolbus_os\drivingtask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/freeRTOS.h
+schoolbus_os\drivingtask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 schoolbus_os\drivingtask.o: ../Core/Inc/FreeRTOSConfig.h
 schoolbus_os\drivingtask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 schoolbus_os\drivingtask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
 schoolbus_os\drivingtask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
 schoolbus_os\drivingtask.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
 schoolbus_os\drivingtask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+schoolbus_os\drivingtask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+schoolbus_os\drivingtask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
 schoolbus_os\drivingtask.o: ../Hardware/4G.h
 schoolbus_os\drivingtask.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 schoolbus_os\drivingtask.o: ..\MyTask\Brocast_Task.h

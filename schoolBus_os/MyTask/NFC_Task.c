@@ -1,6 +1,7 @@
 #include "NFC_Task.h"
 #include "NFC.h"
-#include "freeRTOS.h"
+#include "FreeRTOS.h"
+#include "task.h"
 #include "SR04.h"
 
 
@@ -9,77 +10,113 @@ extern struct SR04 SR04;
 volatile enum BusState intoBusFlag,outofBusFlag;
 enum StudentState studentState;
 
-int tmp1 = 0, tmp2 = 0;
+#define LOWPASS 0.8f
+
+
+float sum1[20];
+float sum2[20];
+	
+/**
+ * @description: 根据一段时间的超声波数据求平均值平滑
+ * @return {*}
+ */
+void AverageFilter(float distance1,float distance2)
+{
+	
+
+	static int8_t i = 0;
+
+	if(i < 20)
+	{
+		sum1[i] = distance1;
+		sum2[i] = distance2;
+		i++;
+	}
+	else
+	{
+		i = 0;
+	}
+	//SR04.distance1 = sum();
+	SR04.distance2 = (sum2[0] + sum2[1] + sum2[2] + sum2[3] + sum2[4]) / 5;
+
+}
+
 //检测上车
 void intoBusCheck(void)
 {
-		static int8_t refreshflag1 = 0;
-		static int8_t refreshflag2 = 0;
-	
+//		static int8_t refreshflag1 = 0;
+//		static int8_t refreshflag2 = 0;
+//	
 		static int8_t sum1 = 0;
 		static int8_t sum2 = 0;
 		
-	int a, b;
-	a = SR04.distance1>0.3?1:0;
-	b = SR04.distance2>0.3?1:0;
-		tmp1 = a - b;
-	tmp2 = a + b;
-	
-		if(SR04.distance1 <= 0.8f && SR04.distance1 >= 0.2f)
-				sum1++;
-		else
-				sum1 = 0;
-		
-		
-		if(SR04.distance2 <= 0.8f && SR04.distance2 >= 0.2f)
-				sum2++;
-		else sum2 = 0;
-		
-		
-		if(sum1 >= 5)
+		static float lastDistance1 = 0;
+		static float lastDistance2 = 0;
+
+		float distance1;
+		float distance2;
+
+		//一阶低通滤波
+		distance1 =LOWPASS * SR04.raw_distance1 + (1-LOWPASS) * lastDistance1;
+		distance2 =LOWPASS * SR04.raw_distance2 + (1-LOWPASS) * lastDistance2;
+
+		lastDistance1 = distance1;
+		lastDistance2 = distance2;
+
+		AverageFilter(distance1,distance2);
+
+		if(SR04.distance1 <= 0.5  && SR04.distance1 >= 0.2f)
 		{
-			SR04.time1 = HAL_GetTick();
-			refreshflag1 = 1;
-			
+				SR04.time1 = HAL_GetTick();
+				SR04.refreshflag1 = 1;
 		}
-		if(refreshflag1 && refreshflag2)
+		
+		
+		if(SR04.distance2 <= 0.5f && SR04.distance2 >= 0.2f)
+		{
+				SR04.time2 = HAL_GetTick();
+				SR04.refreshflag2 = 1;
+		}
+		
+
+		if(SR04.refreshflag1 && SR04.refreshflag2)
 		{
 				if(SR04.time2 > SR04.time1)
 						intoBusFlag = intoBus_1;
 				else 
 						intoBusFlag = intoBus_0;
 				
-				refreshflag1 = refreshflag2 = 0;
+				SR04.refreshflag1 = SR04.refreshflag2 = 0;
 		}
 		
 }
 //检测下车
-void outofBusCheck(void)
-{
-		static int8_t refreshflag1 = 0;
-		static int8_t refreshflag2 = 0;
-		if(SR04.distance1 <= 1.0f && SR04.distance1 >= 0.2f)
-		{
-				SR04.time1 = HAL_GetTick();
-				refreshflag1 = 1;
-		}
-		if(SR04.distance2 <= 1.0f && SR04.distance2 >= 0.2f)
-		{
-				SR04.time2 = HAL_GetTick();
-				refreshflag2 = 1;
-		}
-		
-		if(refreshflag1 && refreshflag2)
-		{
-				if(SR04.time2 < SR04.time1)
-						outofBusFlag = outofBus_1;
-				else 
-						outofBusFlag = outofBus_0;
-				
-				refreshflag1 = refreshflag2 = 0;
-		}
+//void outofBusCheck(void)
+//{
+//		static int8_t refreshflag1 = 0;
+//		static int8_t refreshflag2 = 0;
+//		if(SR04.distance1 <= 1.0f && SR04.distance1 >= 0.2f)
+//		{
+//				SR04.time1 = HAL_GetTick();
+//				refreshflag1 = 1;
+//		}
+//		if(SR04.distance2 <= 1.0f && SR04.distance2 >= 0.2f)
+//		{
+//				SR04.time2 = HAL_GetTick();
+//				refreshflag2 = 1;
+//		}
+//		
+//		if(refreshflag1 && refreshflag2)
+//		{
+//				if(SR04.time2 < SR04.time1)
+//						outofBusFlag = outofBus_1;
+//				else 
+//						outofBusFlag = outofBus_0;
+//				
+//				refreshflag1 = refreshflag2 = 0;
+//		}
 
-}	
+//}	
 
 //上车刷卡机制
 int flag = 0;
@@ -144,7 +181,6 @@ void cardWarning(void)
 
 }
 
-
 /**
  * @description: NFC寻卡读卡任务
  * @return {*}
@@ -155,7 +191,7 @@ void NFC_Task(void* pvParameters)
     { 
 			SR04_GetData();
 			intoBusCheck();
-			outofBusCheck();
+			//outofBusCheck();
 			nfc_findCard();
 			cardWarning();
 			vTaskDelay(50);

@@ -50,7 +50,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-osThreadId GPS_TaskHandle;
+osThreadId NetSend_TaskHandle;
 osThreadId NFC_TaskHandle;
 osThreadId DrivingTask_TaskHandle;
 osThreadId Brocast_Task_TaskHandle;
@@ -116,8 +116,8 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-  osThreadDef(GPS_Task, GPS_Task, osPriorityNormal, 0, 256);
-  GPS_TaskHandle = osThreadCreate(osThread(GPS_Task), NULL);
+  osThreadDef(NetSend_Task, NetSend_Task, osPriorityNormal, 0, 256);
+  NetSend_TaskHandle = osThreadCreate(osThread(NetSend_Task), NULL);
 	
   osThreadDef(NFC_Task, NFC_Task, osPriorityNormal, 0, 1024);
   NFC_TaskHandle = osThreadCreate(osThread(NFC_Task), NULL);

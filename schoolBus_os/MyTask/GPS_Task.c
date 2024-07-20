@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "string.h"
 #include "GPS_Task.h"
 #include "GPS.h"
 #include "FreeRTOS.h"
@@ -21,17 +22,23 @@ void GPS_Send(void)
 {
     char msg[100];
     int size;
+		static char lastPos[100] = "!0,0,0";
 //    
-//   if(GPS.isUsefull)//
-//   {
-//       //sprintf(msg,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
-//       size = snprintf(msg,100,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
-//       Net_send(msg,size);
-//       test++;
-//   }
-		sprintf(msg,"!%f,%f,%f",33.56455,114.25325466,130.066);
-		Net_send(msg,strlen(msg));
-		test++;
+   if(GPS.isUsefull)//
+   {
+       //sprintf(msg,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
+       size = snprintf(msg,100,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
+       Net_send(msg,size);
+       test++;
+				strcpy(lastPos,msg);
+   }
+	 else
+	 {
+				Net_send(lastPos,strlen(lastPos));
+	 }
+//		sprintf(msg,"!%f,%f,%f",33.56455,114.25325466,130.066);
+//		Net_send(msg,strlen(msg));
+//		test++;
 
 }
 
@@ -43,7 +50,7 @@ void GPS_Send(void)
  */
 int testMsg = 0;
 char mytest[]="13975910962,ÄãºÃ£¬ÄãµÄº¢×Ó";
-void GPS_Task(void* pvParameters)
+void NetSend_Task(void* pvParameters)
 {
 	
 	HAL_UART_Receive_IT(&huart1,&GPS_data,1);

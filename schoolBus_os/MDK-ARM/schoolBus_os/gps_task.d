@@ -1,5 +1,6 @@
 schoolbus_os\gps_task.o: ..\MyTask\GPS_Task.c
 schoolbus_os\gps_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+schoolbus_os\gps_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 schoolbus_os\gps_task.o: ..\MyTask\GPS_Task.h
 schoolbus_os\gps_task.o: ../Hardware/GPS.h
 schoolbus_os\gps_task.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h

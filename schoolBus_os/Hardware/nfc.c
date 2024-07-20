@@ -69,7 +69,8 @@ void nfc_findCard(void)
 enum nfc_order laststate = find;
 void CardID_Handler(void)
 {
-
+	static float  time;
+	static float lasttime;
 	if (memcmp(&nfc_frame[0], &nfc_reply[0], 5) == 0)
 	{
 		laststate = nfc;
@@ -85,7 +86,7 @@ void CardID_Handler(void)
 		uint32_t ID;
 		memcpy(&ID, &nfcRecv[13], 4);
 		ID = swap_endian_32(ID);
-
+		//time = HAL_GetTick();
 		//确认获取到一张新卡
 		if (ID != mynfc.CardID)
 		{
@@ -93,9 +94,25 @@ void CardID_Handler(void)
 			mynfc.CardID = ID;
 			mynfc.sumCard++;
 			nfcflag = checked;
+			lasttime = HAL_GetTick();
 			
 			Net_TrasformFlag = 1;
 		}
+		else if(ID == mynfc.CardID)
+		{
+			//确认获取到一张新卡
+			if ((HAL_GetTick()-lasttime>1500))
+			{
+				//更新卡号和计数
+				mynfc.CardID = ID;
+				mynfc.sumCard++;
+				nfcflag = checked;
+				lasttime = HAL_GetTick();
+				
+				Net_TrasformFlag = 1;
+			}
+		}
+
 	}
 
 	memset(nfc_frame, 0x00, 100);
