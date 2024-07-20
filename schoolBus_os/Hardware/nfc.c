@@ -2,7 +2,8 @@
 #include "string.h"
 #include "4G.h"
 #include "stdio.h"
-
+#include "FreeRTOS.h"
+#include "task.h"
 
 extern UART_HandleTypeDef huart3;
 extern UART_HandleTypeDef huart4;
@@ -46,27 +47,25 @@ void nfc_WakeUp(void)
 
 }
 
-static int Net_TrasformFlag = 0;
+int Net_TrasformFlag = 0;
+/**
+ * @description: ∑¢ÀÕ∂¡ø®÷∏¡Ó
+ * @return {*}
+ */
 //∂¡»°ø®∫≈
 void nfc_findCard(void)
 {
 	
 	HAL_UART_Transmit(&huart3,&nfc_find[0],11,100);
 	nfc = find;
-	HAL_UART_Receive_IT(&huart3,(uint8_t *)&nfcdata,1);
-	
-	
-	if(Net_TrasformFlag == 1)
-	{
-		char msg[100];
-		int size = snprintf(msg,100,"A%u",mynfc.CardID);
-		Net_send(msg,size);
-		Net_TrasformFlag =  0;
-	}
-	
+	HAL_UART_Receive_IT(&huart3,(uint8_t *)&nfcdata,1);	
 
 }
 
+/**
+ * @description: ∂¡ø®¥¶¿Ì∫Ø ˝
+ * @return {*}
+ */
 enum nfc_order laststate = find;
 void CardID_Handler(void)
 {

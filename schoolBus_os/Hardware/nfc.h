@@ -31,7 +31,7 @@ struct nfc_data{
 
 extern enum nfc_order nfc;
 extern enum nfc_order laststate;
-
+extern int Net_TrasformFlag;
 
 void nfc_WakeUp(void);
 void nfc_findCard(void);

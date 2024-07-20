@@ -1,3 +1,4 @@
+
 #ifndef __BROCAST_TASK_H
 #define __BROCAST_TASK_H
 
@@ -6,19 +7,18 @@
 
 enum BroadcastType
 {
-		Normal,
-		Refresh,
-		Skip,
-		SleepyDriving,
-		PhoneDriving,
-		CheckCard
+	NormalDriving,
+	Refresh,
+	Skip,
+	SleepyDriving,
+	PhoneDriving,
+	CheckCard
 };
 
 extern enum BroadcastType sendType;
-extern volatile char broadcastmsg[200];
 extern volatile int isBroadcast_Enable;
 
 
-void Broadcast(enum BroadcastType Type);
+void Broadcast(enum BroadcastType Type,char *msg);
 void Brocast_Task(void* pvParameters);
 #endif

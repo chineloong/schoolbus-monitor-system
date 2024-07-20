@@ -42,3 +42,10 @@ schoolbus_os\brocast_task.o: ../Hardware/voiceMiddleware.h
 schoolbus_os\brocast_task.o: ../Core/Inc/main.h
 schoolbus_os\brocast_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 schoolbus_os\brocast_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
+schoolbus_os\brocast_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+schoolbus_os\brocast_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+schoolbus_os\brocast_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+schoolbus_os\brocast_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+schoolbus_os\brocast_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
+schoolbus_os\brocast_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+schoolbus_os\brocast_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h

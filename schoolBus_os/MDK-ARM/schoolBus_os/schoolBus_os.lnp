@@ -40,6 +40,7 @@
 "schoolbus_os\nfc.o"
 "schoolbus_os\sr04.o"
 "schoolbus_os\voicemiddleware.o"
+"schoolbus_os\lowpassfilter.o"
 "schoolbus_os\gps_task.o"
 "schoolbus_os\drivingtask.o"
 "schoolbus_os\nfc_task.o"

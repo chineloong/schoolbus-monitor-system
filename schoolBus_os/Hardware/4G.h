@@ -15,5 +15,5 @@ extern char receiveData[RX_BUFFER_SIZE];
 void Net_sendChar(const char* data);
 void Net_send(char* data,uint16_t size);
 void Net_Config(void);
-
+void Net_SendShortMsg(char * msg);
 #endif

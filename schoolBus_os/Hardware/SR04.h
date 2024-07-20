@@ -9,6 +9,8 @@
 #define TRIG2_H  HAL_GPIO_WritePin(superrsonic2_tirgger_GPIO_Port,superrsonic2_tirgger_Pin,GPIO_PIN_SET)
 #define TRIG2_L  HAL_GPIO_WritePin(superrsonic2_tirgger_GPIO_Port,superrsonic2_tirgger_Pin,GPIO_PIN_RESET)
 
+  
+
 struct SR04
 {
 		float distance1;//æ‡¿Î

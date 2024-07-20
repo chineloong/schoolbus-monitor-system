@@ -9,22 +9,39 @@ extern struct SR04 SR04;
 volatile enum BusState intoBusFlag,outofBusFlag;
 enum StudentState studentState;
 
+int tmp1 = 0, tmp2 = 0;
 //检测上车
 void intoBusCheck(void)
 {
 		static int8_t refreshflag1 = 0;
 		static int8_t refreshflag2 = 0;
-		if(SR04.distance1 <= 1.0f && SR04.distance1 >= 0.2f)
-		{
-				SR04.time1 = HAL_GetTick();
-				refreshflag1 = 1;
-		}
-		if(SR04.distance2 <= 1.0f && SR04.distance2 >= 0.2f)
-		{
-				SR04.time2 = HAL_GetTick();
-				refreshflag2 = 1;
-		}
+	
+		static int8_t sum1 = 0;
+		static int8_t sum2 = 0;
 		
+	int a, b;
+	a = SR04.distance1>0.3?1:0;
+	b = SR04.distance2>0.3?1:0;
+		tmp1 = a - b;
+	tmp2 = a + b;
+	
+		if(SR04.distance1 <= 0.8f && SR04.distance1 >= 0.2f)
+				sum1++;
+		else
+				sum1 = 0;
+		
+		
+		if(SR04.distance2 <= 0.8f && SR04.distance2 >= 0.2f)
+				sum2++;
+		else sum2 = 0;
+		
+		
+		if(sum1 >= 5)
+		{
+			SR04.time1 = HAL_GetTick();
+			refreshflag1 = 1;
+			
+		}
 		if(refreshflag1 && refreshflag2)
 		{
 				if(SR04.time2 > SR04.time1)
@@ -136,11 +153,11 @@ void NFC_Task(void* pvParameters)
 {
     while(1)
     { 
-				SR04_GetData();
-				intoBusCheck();
-				outofBusCheck();
-        nfc_findCard();
-				cardWarning();
-        vTaskDelay(100);
+			SR04_GetData();
+			intoBusCheck();
+			outofBusCheck();
+			nfc_findCard();
+			cardWarning();
+			vTaskDelay(50);
     }
 }

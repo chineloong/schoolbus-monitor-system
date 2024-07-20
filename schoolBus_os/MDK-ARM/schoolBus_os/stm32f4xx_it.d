@@ -47,3 +47,5 @@ schoolbus_os\stm32f4xx_it.o: ../Hardware/nfc.h
 schoolbus_os\stm32f4xx_it.o: ../MyTask/DrivingTask.h
 schoolbus_os\stm32f4xx_it.o: ../Hardware/GPS.h
 schoolbus_os\stm32f4xx_it.o: ../Hardware/voiceMiddleware.h
+schoolbus_os\stm32f4xx_it.o: ../MyTask/NetBroadcast.h
+schoolbus_os\stm32f4xx_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h

@@ -7,6 +7,7 @@ volatile struct SR04 SR04;
 extern TIM_HandleTypeDef htim1;
 extern enum nfc_checkflag nfcflag;
 
+
 void SR04_Init(void)
 {
 		SR04.distance1 = 0;
@@ -92,3 +93,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)//
 	
 }
  
+/**
+ * @description: µÍÍ¨ÂË²¨Æ÷Éè¼Æ
+ * @return {*}
+ */

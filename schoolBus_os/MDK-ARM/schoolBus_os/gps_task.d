@@ -46,4 +46,6 @@ schoolbus_os\gps_task.o: ../Hardware/4G.h
 schoolbus_os\gps_task.o: ../Hardware/SR04.h
 schoolbus_os\gps_task.o: ../Core/Inc/main.h
 schoolbus_os\gps_task.o: ../Core/Inc/tim.h
+schoolbus_os\gps_task.o: ../Hardware/nfc.h
 schoolbus_os\gps_task.o: ../Hardware/voiceMiddleware.h
+schoolbus_os\gps_task.o: ..\MyTask\DrivingTask.h

@@ -3,9 +3,9 @@
 #include "voiceMiddleware.h"
 #include "stdio.h"
 #include "string.h"
+#include "cmsis_os.h"
 
 enum BroadcastType sendType;
-volatile char broadcastmsg[200];
 volatile int isBroadcast_Enable = 1;
 
 //疲劳驾驶通知
@@ -21,18 +21,18 @@ char checkcard[]={0xC9,0xCF,0xB3,0xB5,0xC7,0xEB,0xCB,0xA2,0xBF,0xA8,0x00};
 * @param[in]      none
 * @retval         none
 */
-void Broadcast(enum BroadcastType Type)
+void Broadcast(enum BroadcastType Type,char *msg)
 {
 		switch(Type)
 		{
-			case Normal:
+			case NormalDriving:
 				
-				sprintf((char *)text_recv.text_buffer,"%s",broadcastmsg);
+				sprintf((char *)text_recv.text_buffer,"%s",msg);
 				
 				/* 必须紧跟sprintf(复制粘贴即可) */
 				//求sentence length
 				// text_recv.buffer_size = sizeof(text_recv.text_buffer)/sizeof(text_recv.text_buffer[0])-1;
-				text_recv.buffer_size = strlen((const char *)broadcastmsg);
+				text_recv.buffer_size = strlen(msg);
 				
 				if( text_recv.text_buffer[text_recv.buffer_size-1] == 0 ){
 					text_recv.sentense_length = strlen((const char *)text_recv.text_buffer);
@@ -105,8 +105,8 @@ void Brocast_Task(void* pvParameters)
     {
         if(isBroadcast_Enable == 0)
         {
-            osDelay(6000);
-            Broadcast(Refresh);
+            osDelay(2000);
+            Broadcast(Refresh,NULL);
             isBroadcast_Enable = 1;
         }
         

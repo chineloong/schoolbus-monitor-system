@@ -30,6 +30,8 @@
 #include "DrivingTask.h"
 #include "GPS.h"
 #include "voiceMiddleware.h"
+#include "NetBroadcast.h"
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -41,6 +43,7 @@
 /* USER CODE BEGIN PD */
 int NetRxCount=0;
 int NFCRxCount=0;
+int broadcastmsgFlag = 0;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -312,6 +315,11 @@ void UART4_IRQHandler(void)
 		__HAL_UART_DISABLE_IT(&huart4,UART_IT_IDLE);
 		
 		memcpy(&receiveData,rxBuffer,RX_BUFFER_SIZE);
+		if(receiveData[0] == '!')
+		{
+				sprintf(broadcastmsg, "%s", &receiveData[1]);
+				broadcastmsgFlag = 1;
+		}
 		memset(rxBuffer,0,RX_BUFFER_SIZE);
 
 	}

@@ -35,3 +35,17 @@ schoolbus_os\netbroadcast.o: ../Hardware/4G.h
 schoolbus_os\netbroadcast.o: ..\MyTask\Brocast_Task.h
 schoolbus_os\netbroadcast.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 schoolbus_os\netbroadcast.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+schoolbus_os\netbroadcast.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+schoolbus_os\netbroadcast.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+schoolbus_os\netbroadcast.o: ../Core/Inc/FreeRTOSConfig.h
+schoolbus_os\netbroadcast.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+schoolbus_os\netbroadcast.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+schoolbus_os\netbroadcast.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+schoolbus_os\netbroadcast.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+schoolbus_os\netbroadcast.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+schoolbus_os\netbroadcast.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+schoolbus_os\netbroadcast.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+schoolbus_os\netbroadcast.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+schoolbus_os\netbroadcast.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
+schoolbus_os\netbroadcast.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+schoolbus_os\netbroadcast.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h

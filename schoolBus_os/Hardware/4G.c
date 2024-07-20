@@ -27,7 +27,9 @@ const char http_response[]="AT+HTPHD=Connection: close[0D][0A]\r\n";
 const char http_time[]="AAT+HTPTO=10\r\n";
 const char Restart[]="AT+Z\r\n";
 const char Transmit[]="AT+ENTM\r\n";
+const char InternalTime[]="AT+UARTFT=50\r\n";
 
+const char MsgSendHead[]="usr.cnAT+SMSEND=86";
 // 串口发送数据函数const char *
 void Net_sendChar(const char* data) 
 {
@@ -41,7 +43,7 @@ void Net_sendChar(const char* data)
 void Net_send(char* data,uint16_t size) 
 {
     // 将要发送的数据拷贝到发送缓冲区
-    strncpy(txBuffer, data, size);
+    strncpy(txBuffer, data, size+1);
     // 调用HAL库函数发送数据
     HAL_UART_Transmit(&huart4, (uint8_t*)txBuffer, strlen(txBuffer), HAL_MAX_DELAY);
 }
@@ -56,7 +58,8 @@ void NetConfigMode(void)
 {
 		
 		Net_sendChar(config_head);
-	
+//		char temp[RX_BUFFER_SIZE];
+//		strcpy(temp,&receiveData[0]);
 		while(strcmp(receiveData, "a") != 0)
 		{
 		};
@@ -68,13 +71,16 @@ void NetConfigMode(void)
 		HAL_Delay(500);
 
 }
-
+/**
+ * @description: 进入传输模式
+ * @return {*}
+ */
 void NetTransformMode(void)
 {
 		char str[100];
 		Net_sendChar(Transmit);
-		sprintf(str,"%s%s",netmode,ack);sprintf(str,"%s%s",netmode,ack);
-		while(strcmp(receiveData,str) != 0)
+		//sprintf(str,"%s%s",netmode,ack);sprintf(str,"%s%s",netmode,ack);
+		while(strcmp(receiveData,"\r\nOK\r\n\r\n") != 0)
 		{
 		};
 
@@ -162,12 +168,29 @@ void Net_Config(void)
     }
 		if(config_flag == 6)
     {
+				while(strcmp(receiveData, ack) != 0)
+				{};
+        // 设置接收标志位-为true
+        config_flag = 7;
+				HAL_UART_Transmit(&huart4, (uint8_t *)InternalTime, strlen(InternalTime), HAL_MAX_DELAY);
+        HAL_Delay(300);
+    }
+		if(config_flag == 7)
+    {
 				while(strcmp(receiveData,ack) != 0)
 				{};
         // 设置接收标志位为true
-        config_flag = 7;
+        config_flag = 8;
 				NetRestart();
     }
 }
 
 
+void Net_SendShortMsg(char * msg)
+{
+		int size;
+		char send[200];
+		size = snprintf(send,200,"%s%s\r\n",MsgSendHead,msg);
+		Net_send(send,size);
+
+}

@@ -4,6 +4,8 @@
         "4g.h": "c",
         "drivingtask.h": "c",
         "brocast_task.h": "c",
-        "voicemiddleware.h": "c"
+        "voicemiddleware.h": "c",
+        "sr04.h": "c",
+        "nfc.h": "c"
     }
 }

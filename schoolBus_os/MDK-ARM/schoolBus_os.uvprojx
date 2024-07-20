@@ -665,6 +665,16 @@
               <FileType>1</FileType>
               <FilePath>..\Hardware\voiceMiddleware.c</FilePath>
             </File>
+            <File>
+              <FileName>LowPassFilter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\LowPassFilter.c</FilePath>
+            </File>
+            <File>
+              <FileName>LowPassFilter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Hardware\LowPassFilter.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
