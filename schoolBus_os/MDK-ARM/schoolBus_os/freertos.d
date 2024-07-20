@@ -48,3 +48,6 @@ schoolbus_os\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/even
 schoolbus_os\freertos.o: ../Hardware/4G.h
 schoolbus_os\freertos.o: ../MyTask/GPS_Task.h
 schoolbus_os\freertos.o: ../MyTask/NFC_Task.h
+schoolbus_os\freertos.o: ../MyTask/Brocast_Task.h
+schoolbus_os\freertos.o: ../MyTask/DrivingTask.h
+schoolbus_os\freertos.o: ../MyTask/NetBroadcast.h

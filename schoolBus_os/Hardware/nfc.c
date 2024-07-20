@@ -59,7 +59,7 @@ void nfc_findCard(void)
 	if(Net_TrasformFlag == 1)
 	{
 		char msg[100];
-		int size = snprintf(msg,100,"@%u",mynfc.CardID);
+		int size = snprintf(msg,100,"A%u",mynfc.CardID);
 		Net_send(msg,size);
 		Net_TrasformFlag =  0;
 	}

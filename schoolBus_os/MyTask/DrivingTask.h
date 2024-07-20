@@ -5,7 +5,7 @@
 
 
 
-extern enum DrivingType drivingType;
+extern volatile int drivingType;
 extern uint8_t DrivingReceive;
 
 void DrivingTask_Init(void);

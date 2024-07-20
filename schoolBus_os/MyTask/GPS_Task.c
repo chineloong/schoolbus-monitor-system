@@ -20,17 +20,17 @@ void GPS_Send(void)
 {
     char msg[100];
     int size;
-    
-   if(GPS.isUsefull)//
-   {
-       //sprintf(msg,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
-       size = snprintf(msg,100,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
-       Net_send(msg,size);
-       test++;
-   }
-//		sprintf(msg,"!%f,%f,%f",100.00f,200.1f,100.0f);
-//		Net_send(msg);
-		test++;
+//    
+//   if(GPS.isUsefull)//
+//   {
+//       //sprintf(msg,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
+//       size = snprintf(msg,100,"!%f,%f,%f",GPS.latitude,GPS.longitude,GPS.speed);
+//       Net_send(msg,size);
+//       test++;
+//   }
+//		size = snprintf(msg,100,"!%f,%f,%f",33.56455,114.25325466,130.066);
+//		Net_send(msg,size);
+//		test++;
 
 }
 
@@ -47,9 +47,9 @@ void GPS_Task(void* pvParameters)
 		SR04_Init();
     while(1)
     {
-        parseGpsBuffer();
-        GPS_Send();
+				parseGpsBuffer();
+				GPS_Send();
 				
-        vTaskDelay(200);
+				vTaskDelay(200);
     }
 }

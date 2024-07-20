@@ -40,3 +40,4 @@ schoolbus_os\drivingtask.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/
 schoolbus_os\drivingtask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
 schoolbus_os\drivingtask.o: ../Hardware/4G.h
 schoolbus_os\drivingtask.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+schoolbus_os\drivingtask.o: ..\MyTask\Brocast_Task.h

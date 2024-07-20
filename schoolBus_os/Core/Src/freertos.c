@@ -28,6 +28,9 @@
 #include "4G.h"
 #include "GPS_Task.h"
 #include "NFC_Task.h"
+#include "Brocast_Task.h"
+#include "DrivingTask.h"
+#include "NetBroadcast.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -48,9 +51,13 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
 osThreadId GPS_TaskHandle;
+osThreadId NFC_TaskHandle;
+osThreadId DrivingTask_TaskHandle;
+osThreadId Brocast_Task_TaskHandle;
+osThreadId NetBroadcastTask_TaskHandle;
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
-osThreadId NFC_TaskHandle;
+
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 
@@ -111,8 +118,18 @@ void MX_FREERTOS_Init(void) {
   /* add threads, ... */
   osThreadDef(GPS_Task, GPS_Task, osPriorityNormal, 0, 256);
   GPS_TaskHandle = osThreadCreate(osThread(GPS_Task), NULL);
+	
   osThreadDef(NFC_Task, NFC_Task, osPriorityNormal, 0, 1024);
   NFC_TaskHandle = osThreadCreate(osThread(NFC_Task), NULL);
+	
+  osThreadDef(DrivingTask, DrivingTask, osPriorityNormal, 0, 256);
+  DrivingTask_TaskHandle = osThreadCreate(osThread(DrivingTask), NULL);
+	
+  osThreadDef(Brocast_Task, Brocast_Task, osPriorityNormal, 0, 256);
+  Brocast_Task_TaskHandle = osThreadCreate(osThread(Brocast_Task), NULL);
+	
+	osThreadDef(NetBroadcastTask, NetBroadcastTask, osPriorityNormal, 0, 256);
+  NetBroadcastTask_TaskHandle = osThreadCreate(osThread(NetBroadcastTask), NULL);
   /* USER CODE END RTOS_THREADS */
 
 }

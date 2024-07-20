@@ -6,7 +6,7 @@
 
 extern struct SR04 SR04;
 
-enum BusState intoBusFlag,outofBusFlag;
+volatile enum BusState intoBusFlag,outofBusFlag;
 enum StudentState studentState;
 
 //检测上车
@@ -14,12 +14,12 @@ void intoBusCheck(void)
 {
 		static int8_t refreshflag1 = 0;
 		static int8_t refreshflag2 = 0;
-		if(SR04.distance1 <= 0.6f && SR04.distance1 >= 0.2f)
+		if(SR04.distance1 <= 1.0f && SR04.distance1 >= 0.2f)
 		{
 				SR04.time1 = HAL_GetTick();
 				refreshflag1 = 1;
 		}
-		if(SR04.distance2 <= 0.6f && SR04.distance2 >= 0.2f)
+		if(SR04.distance2 <= 1.0f && SR04.distance2 >= 0.2f)
 		{
 				SR04.time2 = HAL_GetTick();
 				refreshflag2 = 1;
@@ -66,18 +66,19 @@ void outofBusCheck(void)
 
 //上车刷卡机制
 int flag = 0;
+uint32_t waitCircle = 0;
 void cardWarning(void)
 {
         //上次的刷卡总数
 		static int8_t lastSum = 0;
         //未刷卡的等待时间
-		static int8_t waitCircle = 0;
+		
 
 		//上车并刷卡
 		if(studentState == waiting && lastSum < mynfc.sumCard)
 		{
-            studentState = onBus_checked;
-            lastSum = mynfc.sumCard;
+					studentState = onBus_checked;
+					lastSum = mynfc.sumCard;
 //				studentID_Send();		
 		}
 		//刷卡后通过
@@ -101,23 +102,25 @@ void cardWarning(void)
             while(lastSum >= mynfc.sumCard)
             {                
                 waitCircle++;
-                if(waitCircle > 50)
+                if(waitCircle > 2500000)
                 {
                     waitCircle = 0;
                     break;
                 }
-		    }
+						}
 
             //如果一定时间内mynfc.sumCard有变化，说明有刷卡，跳过
             if(lastSum < mynfc.sumCard)
             {
-                studentState = waiting;
+                
                 lastSum = mynfc.sumCard;
-                intoBusFlag = intoBus_0;
-                waitCircle = 0;
-
-                SR04.time1 = SR04.time2 = 0;
+                
             }
+						studentState = waiting;
+						intoBusFlag = intoBus_0;
+						waitCircle = 0;
+
+						SR04.time1 = SR04.time2 = 0;
 
         }
 
@@ -134,7 +137,10 @@ void NFC_Task(void* pvParameters)
     while(1)
     { 
 				SR04_GetData();
+				intoBusCheck();
+				outofBusCheck();
         nfc_findCard();
+				cardWarning();
         vTaskDelay(100);
     }
 }

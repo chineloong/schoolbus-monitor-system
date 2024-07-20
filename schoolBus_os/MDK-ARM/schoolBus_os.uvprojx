@@ -685,6 +685,16 @@
               <FileType>1</FileType>
               <FilePath>..\MyTask\NFC_Task.c</FilePath>
             </File>
+            <File>
+              <FileName>Brocast_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyTask\Brocast_Task.c</FilePath>
+            </File>
+            <File>
+              <FileName>NetBroadcast.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyTask\NetBroadcast.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

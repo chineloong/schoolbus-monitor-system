@@ -27,7 +27,13 @@ Txt_recv text_recv = {0};
 #define robomaster_length						24			//机甲大师启动
 uint8_t GB_deviceok[14] = {0xC9, 0xE8, 0xB1, 0xB8, 0xB3, 0xF5, 0xCA, 0xBC,0xBB, 0xAF, 0xCD, 0xEA, 0xB3, 0xC9};
 uint8_t GB_ChildrenPleaseLeaveBus[12] = {0xD0,0xA1,0xC5,0xF3,0xD3,0xD1,0xC7,0xEB,0xCF,0xC2,0xB3,0xB5};
+
+//启动语音
 uint8_t GB_Robomaster_Start[24] = {0xBB,0xB6,0xD3,0xAD,0xCA,0xB9,0xD3,0xC3,0xD0,0xA3,0xB3,0xB5,0xD6,0xC7,0xC4,0xDC,0xB0,0xB2,0xC8,0xAB,0xCF,0xB5,0xCD,0xB3};
+
+	
+
+
 
 /**
 	* @brief          初始化语言库
@@ -195,43 +201,3 @@ void VoiceMsg_clear(void)
 	memset(voice_packer.frame_buf,0x00,_TEXT_MAX_LENGTH);
 }
 
-/**
-* @brief         自定义发送语音
-* @param[in]      none
-* @retval         none
-*/
-uint8_t word_seq;
-void Broadcast(char * msg,uint8_t sendType)
-{
-		switch(sendType)
-		{
-			case 1:
-				
-				sprintf((char *)text_recv.text_buffer,"%s",msg);
-				
-				/* 必须紧跟sprintf(复制粘贴即可) */
-				//求sentence length
-				// text_recv.buffer_size = sizeof(text_recv.text_buffer)/sizeof(text_recv.text_buffer[0])-1;
-				text_recv.buffer_size = strlen(msg);
-				
-				if( text_recv.text_buffer[text_recv.buffer_size-1] == 0 ){
-					text_recv.sentense_length = strlen((const char *)text_recv.text_buffer);
-				}
-				else
-					text_recv.sentense_length = text_recv.buffer_size;	
-				//执行单次发送
-				Voice_Sendmsg(text_recv.text_buffer,text_recv.sentense_length);	
-				/* ---------复制粘贴结束---------*/
-				
-				break;
-			case 2:
-				/* 必须和sprintf 不同时执行*/
-				voice_packer.clearvoice();
-				break;
-			
-
-			default:
-				break;
-			
-		}
-}

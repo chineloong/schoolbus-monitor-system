@@ -77,7 +77,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+   HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -114,6 +114,7 @@ int main(void)
 	Init_voicemodule();
 	//º› ªŒ•πÊ≥ı ºªØ
 	DrivingTask_Init();
+	Net_sendChar("r");
 	//Init_voicemodule();
   /* USER CODE END 2 */
 

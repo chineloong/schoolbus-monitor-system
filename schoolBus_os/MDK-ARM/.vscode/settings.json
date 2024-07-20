@@ -2,6 +2,8 @@
     "files.associations": {
         "gps_task.h": "c",
         "4g.h": "c",
-        "drivingtask.h": "c"
+        "drivingtask.h": "c",
+        "brocast_task.h": "c",
+        "voicemiddleware.h": "c"
     }
 }

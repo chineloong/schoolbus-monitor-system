@@ -2,7 +2,7 @@
 #include "stm32f4xx.h"
 #include "nfc.h"
 
-struct SR04 SR04;
+volatile struct SR04 SR04;
 
 extern TIM_HandleTypeDef htim1;
 extern enum nfc_checkflag nfcflag;
