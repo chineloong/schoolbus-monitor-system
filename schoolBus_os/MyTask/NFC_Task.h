@@ -6,7 +6,9 @@ enum BusState{
 		intoBus_0,
 		intoBus_1,
 		outofBus_0,
-		outofBus_1
+		outofBus_1,
+		state_change,
+		midstate
 };
 
 enum StudentState{

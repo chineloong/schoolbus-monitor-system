@@ -45,3 +45,4 @@ schoolbus_os\nfc_task.o: ../Hardware/SR04.h
 schoolbus_os\nfc_task.o: ../Core/Inc/main.h
 schoolbus_os\nfc_task.o: ../Core/Inc/tim.h
 schoolbus_os\nfc_task.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+schoolbus_os\nfc_task.o: ..\MyTask\Brocast_Task.h

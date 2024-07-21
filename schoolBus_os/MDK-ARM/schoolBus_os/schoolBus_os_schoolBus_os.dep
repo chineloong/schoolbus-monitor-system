@@ -136,7 +136,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x6618A7D3)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x6618A7D3)
 I (../Hardware/4G.h)(0x669B9145)
 I (../MyTask/GPS_Task.h)(0x669C0F65)
-I (../MyTask/NFC_Task.h)(0x669B8BC4)
+I (../MyTask/NFC_Task.h)(0x669C7EF7)
 I (../MyTask/Brocast_Task.h)(0x669BBDE0)
 I (../MyTask/DrivingTask.h)(0x669BD897)
 I (../MyTask/NetBroadcast.h)(0x669C0E41)
@@ -917,7 +917,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x6618A7D3
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x6618A7D3)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x6618A7D3)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/stream_buffer.h)(0x6618A7D3)
-F (../Middlewares/Third_Party/FreeRTOS/Source/tasks.c)(0x669BDDBF)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Hardware -I ../MyTask-I.\RTE\_schoolBus_os-ID:\STM32Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\STM32Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o schoolbus_os\tasks.o --omf_browse schoolbus_os\tasks.crf --depend schoolbus_os\tasks.d)
+F (../Middlewares/Third_Party/FreeRTOS/Source/tasks.c)(0x669C694C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Hardware -I ../MyTask-I.\RTE\_schoolBus_os-ID:\STM32Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\STM32Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o schoolbus_os\tasks.o --omf_browse schoolbus_os\tasks.crf --depend schoolbus_os\tasks.d)
 I (D:\keil5\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x6025237E)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x6618A7D3)
@@ -1315,8 +1315,8 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x6618A7D3)
 I (../Hardware/4G.h)(0x669B9145)
 I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (..\MyTask\Brocast_Task.h)(0x669BBDE0)
-F (..\MyTask\NFC_Task.c)(0x669C0EB9)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Hardware -I ../MyTask-I.\RTE\_schoolBus_os-ID:\STM32Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\STM32Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o schoolbus_os\nfc_task.o --omf_browse schoolbus_os\nfc_task.crf --depend schoolbus_os\nfc_task.d)
-I (..\MyTask\NFC_Task.h)(0x669B8BC4)
+F (..\MyTask\NFC_Task.c)(0x669C85EE)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Hardware -I ../MyTask-I.\RTE\_schoolBus_os-ID:\STM32Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\STM32Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o schoolbus_os\nfc_task.o --omf_browse schoolbus_os\nfc_task.crf --depend schoolbus_os\nfc_task.d)
+I (..\MyTask\NFC_Task.h)(0x669C7EF7)
 I (../Hardware/NFC.h)(0x669BB909)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x6618A7CA)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x6618A7CA)
@@ -1361,7 +1361,8 @@ I (../Hardware/SR04.h)(0x669C029E)
 I (../Core/Inc/main.h)(0x66994D0C)
 I (../Core/Inc/tim.h)(0x6695C812)
 I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
-F (..\MyTask\Brocast_Task.c)(0x669BD411)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Hardware -I ../MyTask-I.\RTE\_schoolBus_os-ID:\STM32Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\STM32Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o schoolbus_os\brocast_task.o --omf_browse schoolbus_os\brocast_task.crf --depend schoolbus_os\brocast_task.d)
+I (..\MyTask\Brocast_Task.h)(0x669BBDE0)
+F (..\MyTask\Brocast_Task.c)(0x669C8695)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Hardware -I ../MyTask-I.\RTE\_schoolBus_os-ID:\STM32Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\STM32Packs\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o schoolbus_os\brocast_task.o --omf_browse schoolbus_os\brocast_task.crf --depend schoolbus_os\brocast_task.d)
 I (..\MyTask\Brocast_Task.h)(0x669BBDE0)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x6618A7CA)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x6618A7CA)
