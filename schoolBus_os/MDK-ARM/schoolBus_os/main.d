@@ -46,7 +46,6 @@ schoolbus_os\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 schoolbus_os\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 schoolbus_os\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 schoolbus_os\main.o: ../Core/Inc/dma.h
-schoolbus_os\main.o: ../Core/Inc/tim.h
 schoolbus_os\main.o: ../Core/Inc/usart.h
 schoolbus_os\main.o: ../Core/Inc/gpio.h
 schoolbus_os\main.o: ../Hardware/4G.h

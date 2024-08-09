@@ -65,14 +65,6 @@ void Error_Handler(void);
 #define BLE_Tx_GPIO_Port GPIOA
 #define BLE_Rx_Pin GPIO_PIN_3
 #define BLE_Rx_GPIO_Port GPIOA
-#define supersonic_echo_Pin GPIO_PIN_9
-#define supersonic_echo_GPIO_Port GPIOE
-#define superrsonic_tirgger_Pin GPIO_PIN_10
-#define superrsonic_tirgger_GPIO_Port GPIOE
-#define supersonic2_echo_Pin GPIO_PIN_11
-#define supersonic2_echo_GPIO_Port GPIOE
-#define superrsonic2_tirgger_Pin GPIO_PIN_12
-#define superrsonic2_tirgger_GPIO_Port GPIOE
 #define NFC_Tx_Pin GPIO_PIN_10
 #define NFC_Tx_GPIO_Port GPIOB
 #define NFC_Rx_Pin GPIO_PIN_11
@@ -81,6 +73,16 @@ void Error_Handler(void);
 #define GPS_Tx_GPIO_Port GPIOA
 #define GPS_Rx_Pin GPIO_PIN_10
 #define GPS_Rx_GPIO_Port GPIOA
+#define SpeakTx_Pin GPIO_PIN_12
+#define SpeakTx_GPIO_Port GPIOC
+#define check1_Pin GPIO_PIN_0
+#define check1_GPIO_Port GPIOD
+#define check1_EXTI_IRQn EXTI0_IRQn
+#define check2_Pin GPIO_PIN_1
+#define check2_GPIO_Port GPIOD
+#define check2_EXTI_IRQn EXTI1_IRQn
+#define SpeakRx_Pin GPIO_PIN_2
+#define SpeakRx_GPIO_Port GPIOD
 
 /* USER CODE BEGIN Private defines */
 

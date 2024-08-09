@@ -32,15 +32,6 @@ schoolbus_os\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_t
 schoolbus_os\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 schoolbus_os\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 schoolbus_os\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
-schoolbus_os\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-schoolbus_os\stm32f4xx_it.o: ../Core/Inc/FreeRTOSConfig.h
-schoolbus_os\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
-schoolbus_os\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
-schoolbus_os\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
-schoolbus_os\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
-schoolbus_os\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
-schoolbus_os\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
-schoolbus_os\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
 schoolbus_os\stm32f4xx_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\string.h
 schoolbus_os\stm32f4xx_it.o: ../Hardware/4G.h
 schoolbus_os\stm32f4xx_it.o: ../Hardware/nfc.h
@@ -49,3 +40,4 @@ schoolbus_os\stm32f4xx_it.o: ../Hardware/GPS.h
 schoolbus_os\stm32f4xx_it.o: ../Hardware/voiceMiddleware.h
 schoolbus_os\stm32f4xx_it.o: ../MyTask/NetBroadcast.h
 schoolbus_os\stm32f4xx_it.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+schoolbus_os\stm32f4xx_it.o: ../MyTask/NFC_Task.h

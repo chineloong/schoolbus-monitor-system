@@ -5,7 +5,6 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "4G.h"
-#include "SR04.h"
 #include "nfc.h"
 #include "voiceMiddleware.h"
 #include "DrivingTask.h"
@@ -54,7 +53,6 @@ void NetSend_Task(void* pvParameters)
 {
 	
 	HAL_UART_Receive_IT(&huart1,&GPS_data,1);
-	SR04_Init();
 
     while(1)
     {

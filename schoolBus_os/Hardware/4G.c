@@ -24,7 +24,7 @@ const char httpmode[]="AT+HTPTP=POST\r\n";
 const char httpurl[]="AT+HTPURL=http://101.32.36.52:8088/post\r\n";
 const char httpserver[]="AT+HTPSV=101.32.36.52,8088\r\n";
 const char http_response[]="AT+HTPHD=Connection: close[0D][0A]\r\n";
-const char http_time[]="AAT+HTPTO=10\r\n";
+const char http_time[]="AT+HTPTO=10\r\n";
 const char Restart[]="AT+Z\r\n";
 const char Transmit[]="AT+ENTM\r\n";
 const char InternalTime[]="AT+UARTFT=50\r\n";
@@ -124,6 +124,7 @@ void Net_Config(void)
         config_flag = 2;
 				memset(receiveData,0,RX_BUFFER_SIZE);
 				HAL_UART_Transmit(&huart4, (uint8_t *)netmode, strlen(netmode), HAL_MAX_DELAY);
+			
         HAL_Delay(300);
     }
 		if(config_flag == 2)
@@ -136,6 +137,9 @@ void Net_Config(void)
         config_flag = 3;
 				memset(receiveData,0,RX_BUFFER_SIZE);
 				HAL_UART_Transmit(&huart4, (uint8_t *)httpmode, strlen(httpmode), HAL_MAX_DELAY);
+				while(strcmp(receiveData,"\r\nOK\r\n\r\n") != 0)
+				{
+				};
         HAL_Delay(300);
     }
 		if(config_flag == 3)
