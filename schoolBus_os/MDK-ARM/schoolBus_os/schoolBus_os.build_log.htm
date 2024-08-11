@@ -17,17 +17,26 @@ Library Manager: ArmAr.exe V5.06 update 7 (build 960)
 Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
 CPU DLL:         SARMCM3.DLL V5.38.0.0
 Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      Segger\JL2CM3.dll V2.99.23.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 C:\Users\Chineloong\Desktop\schoolbus\schoolBus_os\MDK-ARM\schoolBus_os.uvprojx
-Project File Date:  07/28/2024
+Project File Date:  08/11/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\keil5\ARM\ARMCC\Bin'
 Build target 'schoolBus_os'
-"schoolBus_os\schoolBus_os.axf" - 0 Error(s), 0 Warning(s).
+compiling NFC_Task.c...
+..\MyTask\NFC_Task.c(112): warning:  #223-D: function "osDelay" declared implicitly
+  							osDelay(5000);
+..\MyTask\NFC_Task.c(136): warning:  #223-D: function "osDelay" declared implicitly
+  				osDelay(500);
+..\MyTask\NFC_Task.c: 2 warnings, 0 errors
+linking...
+Program Size: Code=35804 RO-data=35640 RW-data=484 ZI-data=36284  
+FromELF: creating hex file...
+"schoolBus_os\schoolBus_os.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -51,7 +60,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.6.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:06
 </pre>
 </body>
 </html>

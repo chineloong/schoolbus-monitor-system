@@ -28,6 +28,7 @@ schoolbus_os\nfc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 schoolbus_os\nfc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 schoolbus_os\nfc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 schoolbus_os\nfc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+schoolbus_os\nfc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 schoolbus_os\nfc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 schoolbus_os\nfc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 schoolbus_os\nfc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
@@ -43,3 +44,7 @@ schoolbus_os\nfc.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM
 schoolbus_os\nfc.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
 schoolbus_os\nfc.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 schoolbus_os\nfc.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+schoolbus_os\nfc.o: ../MyTask/LCD_Task.h
+schoolbus_os\nfc.o: ../Hardware/Lcd_Driver.h
+schoolbus_os\nfc.o: ../Hardware/GUI.h
+schoolbus_os\nfc.o: ../Hardware/QDTFT_demo.h

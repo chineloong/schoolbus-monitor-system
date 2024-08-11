@@ -67,6 +67,7 @@ int msgSendFlag = 0;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern DMA_HandleTypeDef hdma_spi1_tx;
 extern DMA_HandleTypeDef hdma_uart5_tx;
 extern DMA_HandleTypeDef hdma_uart5_rx;
 extern UART_HandleTypeDef huart4;
@@ -187,9 +188,9 @@ void EXTI0_IRQHandler(void)
 
   /* USER CODE END EXTI0_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(check1_Pin);
-	
   /* USER CODE BEGIN EXTI0_IRQn 1 */
 	check1_time = HAL_GetTick();
+	check1Fresh = 1;
   /* USER CODE END EXTI0_IRQn 1 */
 }
 
@@ -204,6 +205,7 @@ void EXTI1_IRQHandler(void)
   HAL_GPIO_EXTI_IRQHandler(check2_Pin);
   /* USER CODE BEGIN EXTI1_IRQn 1 */
 	check2_time = HAL_GetTick();
+	check2Fresh = 1;
   /* USER CODE END EXTI1_IRQn 1 */
 }
 
@@ -352,6 +354,20 @@ void TIM7_IRQHandler(void)
   /* USER CODE BEGIN TIM7_IRQn 1 */
 
   /* USER CODE END TIM7_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA2 stream3 global interrupt.
+  */
+void DMA2_Stream3_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA2_Stream3_IRQn 0 */
+
+  /* USER CODE END DMA2_Stream3_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_spi1_tx);
+  /* USER CODE BEGIN DMA2_Stream3_IRQn 1 */
+
+  /* USER CODE END DMA2_Stream3_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

@@ -25,5 +25,6 @@ void NFC_Task(void* pvParameters);
 
 extern float check1_time;
 extern float check2_time;
-
+extern int check1Fresh;
+extern int check2Fresh;
 #endif

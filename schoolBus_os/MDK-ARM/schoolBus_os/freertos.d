@@ -37,6 +37,7 @@ schoolbus_os\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash
 schoolbus_os\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 schoolbus_os\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 schoolbus_os\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+schoolbus_os\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 schoolbus_os\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 schoolbus_os\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 schoolbus_os\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
@@ -51,3 +52,7 @@ schoolbus_os\freertos.o: ../MyTask/NFC_Task.h
 schoolbus_os\freertos.o: ../MyTask/Brocast_Task.h
 schoolbus_os\freertos.o: ../MyTask/DrivingTask.h
 schoolbus_os\freertos.o: ../MyTask/NetBroadcast.h
+schoolbus_os\freertos.o: ../MyTask/LCD_Task.h
+schoolbus_os\freertos.o: ../Hardware/Lcd_Driver.h
+schoolbus_os\freertos.o: ../Hardware/GUI.h
+schoolbus_os\freertos.o: ../Hardware/QDTFT_demo.h

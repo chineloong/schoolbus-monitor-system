@@ -28,6 +28,7 @@ schoolbus_os\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.
 schoolbus_os\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 schoolbus_os\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 schoolbus_os\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+schoolbus_os\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 schoolbus_os\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 schoolbus_os\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 schoolbus_os\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
@@ -46,9 +47,11 @@ schoolbus_os\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 schoolbus_os\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 schoolbus_os\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 schoolbus_os\main.o: ../Core/Inc/dma.h
+schoolbus_os\main.o: ../Core/Inc/spi.h
 schoolbus_os\main.o: ../Core/Inc/usart.h
 schoolbus_os\main.o: ../Core/Inc/gpio.h
 schoolbus_os\main.o: ../Hardware/4G.h
 schoolbus_os\main.o: ../MyTask/DrivingTask.h
 schoolbus_os\main.o: ../Hardware/nfc.h
 schoolbus_os\main.o: ../Hardware/voiceMiddleware.h
+schoolbus_os\main.o: ../Hardware/Lcd_Driver.h

@@ -65,6 +65,14 @@ void Error_Handler(void);
 #define BLE_Tx_GPIO_Port GPIOA
 #define BLE_Rx_Pin GPIO_PIN_3
 #define BLE_Rx_GPIO_Port GPIOA
+#define LCD_CS_Pin GPIO_PIN_4
+#define LCD_CS_GPIO_Port GPIOA
+#define LCD_LED_Pin GPIO_PIN_4
+#define LCD_LED_GPIO_Port GPIOC
+#define LCD_RS_Pin GPIO_PIN_5
+#define LCD_RS_GPIO_Port GPIOC
+#define LCD_RST_Pin GPIO_PIN_0
+#define LCD_RST_GPIO_Port GPIOB
 #define NFC_Tx_Pin GPIO_PIN_10
 #define NFC_Tx_GPIO_Port GPIOB
 #define NFC_Rx_Pin GPIO_PIN_11

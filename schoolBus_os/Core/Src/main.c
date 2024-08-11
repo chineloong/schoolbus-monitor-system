@@ -20,6 +20,7 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "dma.h"
+#include "spi.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -29,6 +30,7 @@
 #include "DrivingTask.h"
 #include "nfc.h"
 #include "voiceMiddleware.h"
+#include "Lcd_Driver.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -69,6 +71,7 @@ void MX_FREERTOS_Init(void);
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -97,9 +100,10 @@ int main(void)
   MX_USART3_UART_Init();
   MX_UART4_Init();
   MX_UART5_Init();
+  MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
 	
-	HAL_Delay(100);
+	HAL_Delay(1000);
 	
 	//4GÄ£¿é³õÊ¼»¯
 	HAL_UART_Receive_IT(&huart4,(uint8_t *)&rxData,1);
@@ -116,18 +120,19 @@ int main(void)
 	//Init_voicemodule();
   /* USER CODE END 2 */
 
-  /* Call init function for freertos objects (in freertos.c) */
+  /* Call init function for freertos objects (in cmsis_os2.c) */
   MX_FREERTOS_Init();
 
   /* Start scheduler */
   osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
+		
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

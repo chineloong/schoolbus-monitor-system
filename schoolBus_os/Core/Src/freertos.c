@@ -31,6 +31,7 @@
 #include "Brocast_Task.h"
 #include "DrivingTask.h"
 #include "NetBroadcast.h"
+#include "LCD_Task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,6 +56,7 @@ osThreadId NFC_TaskHandle;
 osThreadId DrivingTask_TaskHandle;
 osThreadId Brocast_Task_TaskHandle;
 osThreadId NetBroadcastTask_TaskHandle;
+osThreadId LCD_Task_TaskHandle;
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
 
@@ -130,6 +132,9 @@ void MX_FREERTOS_Init(void) {
 	
 	osThreadDef(NetBroadcastTask, NetBroadcastTask, osPriorityNormal, 0, 256);
   NetBroadcastTask_TaskHandle = osThreadCreate(osThread(NetBroadcastTask), NULL);
+	
+	osThreadDef(LCD_Task, LCD_Task, osPriorityNormal, 0, 256);
+  LCD_Task_TaskHandle = osThreadCreate(osThread(LCD_Task), NULL);
   /* USER CODE END RTOS_THREADS */
 
 }

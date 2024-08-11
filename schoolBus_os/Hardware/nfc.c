@@ -4,6 +4,8 @@
 #include "stdio.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "LCD_Task.h"
+
 
 extern UART_HandleTypeDef huart3;
 extern UART_HandleTypeDef huart4;
@@ -48,6 +50,7 @@ void nfc_WakeUp(void)
 }
 
 int Net_TrasformFlag = 0;
+
 /**
  * @description: ∑¢ÀÕ∂¡ø®÷∏¡Ó
  * @return {*}
@@ -97,6 +100,7 @@ void CardID_Handler(void)
 			lasttime = HAL_GetTick();
 			
 			Net_TrasformFlag = 1;
+			GUI_Flag = success;
 		}
 		else if(ID == mynfc.CardID)
 		{
@@ -110,6 +114,7 @@ void CardID_Handler(void)
 				lasttime = HAL_GetTick();
 				
 				Net_TrasformFlag = 1;
+				GUI_Flag = success;
 			}
 		}
 

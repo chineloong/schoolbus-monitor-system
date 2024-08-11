@@ -3,14 +3,15 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "Brocast_Task.h"
-
+#include "LCD_Task.h"
 
 volatile enum BusState intoBusFlag,outofBusFlag,Busstate;
 enum StudentState studentState;
 
 float check1_time;
 float check2_time;
-
+int check1Fresh = 0;
+int check2Fresh = 0;
 
 float lasttime = 0;
 int8_t lastSum = 0;
@@ -98,6 +99,9 @@ void cardWarning(void)
 							
 				lasttime = HAL_GetTick();
 				intoBusFlag = midstate;
+
+				HAL_NVIC_DisableIRQ(EXTI1_IRQn);
+				HAL_NVIC_DisableIRQ(EXTI1_IRQn);
 				
 		}
 		else if(intoBusFlag == midstate)
@@ -107,11 +111,15 @@ void cardWarning(void)
 //							
 							osDelay(5000);
 							intoBusFlag = intoBus_0;
+							HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+							HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+							check1Fresh = 0;
+							check2Fresh = 0;
 //				}
 //			
 		
 		}
-		else if(lastSum >= mynfc.sumCard && intoBusFlag == state_change &&(HAL_GetTick() - lasttime) > 1500)
+		else if(lastSum >= mynfc.sumCard && intoBusFlag == state_change &&(HAL_GetTick() - lasttime) > 3000)
 		{
 				while (isBroadcast_Enable != 1)
 				{
@@ -127,6 +135,8 @@ void cardWarning(void)
 				lasttime = HAL_GetTick();
 				osDelay(500);
 				
+				check1Fresh = 0;
+				check2Fresh = 0;
 				
 		}
 
@@ -140,8 +150,20 @@ void NFC_Task(void* pvParameters)
 {
     while(1)
     { 
-//			if(intoBusFlag == intoBus_0)
-//					intoBusCheck();
+			if(intoBusFlag == intoBus_0)
+			{
+					if(check1Fresh == 1 && check2Fresh == 1)
+					{
+							intoBusFlag = state_change;
+							check1Fresh = 0;
+							check2Fresh = 0;
+					}
+			}
+			else
+			{
+					check1Fresh = 0;
+					check2Fresh = 0;
+			}
 			//outofBusCheck();
 			nfc_findCard();
 			cardWarning();
